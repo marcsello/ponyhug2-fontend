@@ -35,6 +35,12 @@ const routes = [
         component: Pony
     },
     {
+        path: '/admin',
+        name: 'Admin',
+        // Admin is lazy load, mert az átlag usereknek nem kell
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+    },
+    {
         path: '/about',
         name: 'About',
         // About az lazy load, mert senki se fogja amugy se elolvasni

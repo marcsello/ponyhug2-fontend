@@ -21,6 +21,7 @@
           <b-nav-item to="/hug">Ölelés</b-nav-item>
           <b-nav-item to="/herd">Istálló</b-nav-item>
           <b-nav-item to="/about">Rólunk</b-nav-item>
+          <b-nav-item to="/admin"><span class="text-danger">Admin</span></b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-text class="text-center text-white">
@@ -37,11 +38,7 @@
 <script>
 export default {
   name: "Navbar",
-  methods: {
-    logout() {
-      this.$store.dispatch('logoutUser')
-    }
-  }
+  methods: {}
 }
 </script>
 
