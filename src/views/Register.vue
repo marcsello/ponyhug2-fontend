@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-col class="my-2 text-center">
+      <b-col class="my-3 text-center">
 
         <h1>
           Regisztráció
@@ -13,7 +13,7 @@
       </b-col>
     </b-row>
     <b-row>
-      <b-col class="my-2">
+      <b-col class="my-3">
         <div>
           <b-form @submit.prevent="onSubmit">
             <b-form-group

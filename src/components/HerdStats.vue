@@ -7,7 +7,7 @@
 
 <script>
 export default {
-name: "HerdStats"
+  name: "HerdStats"
 }
 </script>
 
