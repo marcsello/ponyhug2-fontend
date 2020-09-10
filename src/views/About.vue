@@ -16,7 +16,7 @@
           <span class="text-muted">Content, Design</span>
         </b-card>
         <b-card title="Tormakris" img-src="https://placekitten.com/300/300" img-left class="my-2">
-          <span class="text-muted">Backend</span>
+          <span class="text-muted">DevOps, Backend</span>
         </b-card>
       </b-col>
     </b-row>
@@ -31,6 +31,10 @@
           <div class="my-2">
             <h4>Matthyly</h4>
             <p>Piknik nélkül mihez kezdenénk?</p>
+          </div>
+          <div class="my-2">
+            <h4>Amcsi</h4>
+            <p>Kellett egy jó domain</p>
           </div>
           <div class="my-2">
             <h4>Brónulás csoport</h4>
