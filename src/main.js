@@ -5,6 +5,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import api from "@/api";
+
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
@@ -14,6 +16,18 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
+
+Vue.prototype.$api = api
+
+Vue.prototype.$showError = function(text, user_error = false) {
+  this.$bvToast.toast(text, {
+    title: user_error ? "Hopsz" : "Hiba történt",
+    toaster: 'b-toaster-top-center',
+    solid: true,
+    appendToast: false,
+    variant: user_error ? "warning" : "danger"
+  })
+}
 
 new Vue({
   router,

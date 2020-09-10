@@ -43,8 +43,6 @@
 
 <script>
 
-import api from '@/api'
-
 export default {
   name: "Hug",
   data() {
@@ -56,14 +54,14 @@ export default {
   },
   methods: {
     onSubmit() {
-      api.performRegister(this.form.name).then((partial_player_data) => {
+      this.$api.performRegister(this.form.name).then((partial_player_data) => {
 
         this.$store.dispatch('storePlayerData', partial_player_data).then(() => {
           this.$router.push('/')
         })
 
       }).catch(({text}) => {
-        console.log(text)
+        this.$showError(text)
       })
     }
   }

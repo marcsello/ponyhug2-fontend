@@ -21,7 +21,6 @@
 <script>
 import Navbar from "@/components/Navbar";
 import FooterContent from "@/components/FooterContent";
-import api from "@/api";
 
 export default {
   components: {
@@ -29,9 +28,12 @@ export default {
     Navbar
   },
   mounted() {
-    if (api.haveToken) {
-      const playerdata = api.getMyInfo()
-      this.$store.dispatch('storePlayerData', playerdata)
+    if (this.$api.haveToken) {
+      this.$api.getMyInfo().then((playerdata) => {
+        this.$store.dispatch('storePlayerData', playerdata)
+      }).catch(({text}) => {
+        this.$showError(text)
+      })
     }
 
   }
