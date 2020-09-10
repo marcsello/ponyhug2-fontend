@@ -21,11 +21,19 @@
 <script>
 import Navbar from "@/components/Navbar";
 import FooterContent from "@/components/FooterContent";
+import api from "@/api";
 
 export default {
   components: {
     FooterContent,
     Navbar
+  },
+  mounted() {
+    if (api.haveToken) {
+      const playerdata = api.getMyInfo()
+      this.$store.dispatch('storePlayerData', playerdata)
+    }
+
   }
 }
 

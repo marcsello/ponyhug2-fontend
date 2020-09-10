@@ -88,6 +88,7 @@ export default new class {
                 return resolve({
                     playername: data.playername,
                     is_admin: data.is_admin
+                    // Do not pass JWT token any further
                 })
 
             }).catch(reject)
