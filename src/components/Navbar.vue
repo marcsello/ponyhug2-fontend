@@ -8,37 +8,41 @@
         <b-badge>2020</b-badge>
       </b-navbar-brand>
 
-      <b-nav-text class="text-white">
-        <b-icon icon="trophy"/>
-        20
-      </b-nav-text>
+
+      <leader-score v-if="$store.state.playerdata.registered" />
 
       <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-text-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item to="/">Főoldal</b-nav-item>
-          <b-nav-item to="/hug">Ölelés</b-nav-item>
-          <b-nav-item to="/herd">Istálló</b-nav-item>
+          <b-nav-item to="/" v-if="$store.state.playerdata.registered">Főoldal</b-nav-item>
+          <b-nav-item to="/hug" v-if="$store.state.playerdata.registered">Ölelés</b-nav-item>
+          <b-nav-item to="/herd" v-if="$store.state.playerdata.registered">Istálló</b-nav-item>
+          <b-nav-item to="/register" v-if="!$store.state.playerdata.registered">Regisztráció</b-nav-item>
           <b-nav-item to="/about">Rólunk</b-nav-item>
-          <b-nav-item to="/admin"><span class="text-danger">Admin</span></b-nav-item>
+          <b-nav-item to="/admin" v-if="$store.state.playerdata.is_admin"><span class="text-danger">Admin</span>
+          </b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-text class="text-center text-white">
-            Lófasz jóska
+            {{ $store.state.playerdata.name }}
           </b-nav-text>
         </b-navbar-nav>
       </b-collapse>
-
 
     </b-navbar>
   </div>
 </template>
 
 <script>
+
+import LeaderScore from "@/components/LeaderScore";
+
 export default {
   name: "Navbar",
-  methods: {}
+  components: {LeaderScore},
+  methods: {},
+  computed: {}
 }
 </script>
 
