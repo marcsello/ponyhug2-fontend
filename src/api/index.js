@@ -86,7 +86,7 @@ export default new class {
                 localStorage.setItem(LOCAL_STORAGE_KEY, data.jwt)
                 this._setupHTTPObject() // Update JWT token memes
                 return resolve({
-                    playername: data.playername,
+                    name: data.name,
                     is_admin: data.is_admin
                     // Do not pass JWT token any further
                 })
