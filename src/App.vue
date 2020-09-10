@@ -27,7 +27,7 @@ export default {
     FooterContent,
     Navbar
   },
-  mounted() {
+  created() {
     if (this.$api.haveToken) {
       this.$api.getMyInfo().then((playerdata) => {
         this.$store.dispatch('storePlayerData', playerdata)
