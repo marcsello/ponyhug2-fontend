@@ -15,7 +15,7 @@ export default new class {
         const token = localStorage.getItem(LOCAL_STORAGE_KEY)
 
         let headers = {}
-        if (!token) {
+        if (token) {
             headers = {'Authorization': 'Bearer ' + token}
         }
 
@@ -98,7 +98,7 @@ export default new class {
     }
 
     getMyInfo() {
-        return this._performApiCall('get','/players/me',null,true,200)
+        return this._performApiCall('get', '/players/me', null, true, 200)
     }
 
     getCurrentTimeframe() {
@@ -109,27 +109,27 @@ export default new class {
     }
 
     getLeaderStat() {
-        return this._performApiCall('get','/stats/leader', null, true, 200)
+        return this._performApiCall('get', '/stats/leader', null, true, 200)
     }
 
     getHuggedPonies() {
-        return this._performApiCall('get','/ponies', null, true, 200)
+        return this._performApiCall('get', '/ponies', null, true, 200)
     }
 
     getHuggedPony(id) {
-        return this._performApiCall('get','/ponies/' + id, null, true, 200)
+        return this._performApiCall('get', '/ponies/' + id, null, true, 200)
     }
 
     getHugs() {
-        return this._performApiCall('get','/hugs', null, true, 200)
+        return this._performApiCall('get', '/hugs', null, true, 200)
     }
 
     getHug(id) {
-        return this._performApiCall('get','/hugs/' + id, null, true, 200)
+        return this._performApiCall('get', '/hugs/' + id, null, true, 200)
     }
 
     performHug(key) {
-        return this._performApiCall('post','/hugs', {key}, true,201, {
+        return this._performApiCall('post', '/hugs', {key}, true, 201, {
             423: "A játék jelenleg inaktív",
             409: "Ezt a pónit már megölelted",
             ...COMMON_ERROR_CODES
