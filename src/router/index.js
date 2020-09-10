@@ -50,7 +50,10 @@ const routes = [
         path: '/about',
         name: 'About',
         // About az lazy load, mert senki se fogja amugy se elolvasni
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        meta: {
+            public: true
+        }
     }
 ]
 
@@ -72,8 +75,12 @@ router.beforeEach((to, from, next) => {
         if (to.matched.some(record => record.meta.unregisteredOnly)) {
             next()
         } else {
-            // Trying to navigate to a not unregistered (=registered only) endpoint
-            next({name: 'Register'})
+            if (to.matched.some(record => record.meta.public)) {
+                next()
+            } else {
+                // Trying to navigate to a not unregistered (=registered only) and public endpoint
+                next({name: 'Register'})
+            }
         }
     }
 })
