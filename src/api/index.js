@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = "http://localhost:5000/"
+const API_BASE_URL = "http://hugs.hunbrony.hu/api/"
 const LOCAL_STORAGE_KEY = "JWT"
 
 const COMMON_ERROR_CODES = {
