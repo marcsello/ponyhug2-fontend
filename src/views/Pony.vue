@@ -61,9 +61,15 @@ export default {
       this.$api.getHuggedPony(this.$route.params.id).then((ponydata) => {
         this.ponydata = ponydata
         this.ponyLoading = false
-      }).catch(({text}) => {
+      }).catch(({status, text}) => {
         this.ponyLoading = false
-        this.$showToast(text) // TODO: ez is fos
+
+        if (status === 404) {
+          // TODO: What to do
+        } else {
+          this.$showToast(text) // API Call failed
+        }
+
       })
     }
   }

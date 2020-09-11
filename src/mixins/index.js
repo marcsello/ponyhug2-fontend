@@ -5,15 +5,21 @@ export const initialInfoFetchMixin = {
             this.$api.getGameStat().then(({total_ponies}) => {
                 this.$store.dispatch('storeTotalPonies', total_ponies)
             }).catch(({text}) => {
-                this.$showToast(text) // TODO: Nem mindenre kell errort dobni
+                this.$showToast(text) // API call failed
             })
         },
         fetchPublicInfo() { // Fetch info that does not require login
             // Get timeframe
             this.$api.getCurrentTimeframe().then((timeframe) => {
                 this.$store.dispatch('storeTimeframe', timeframe)
-            }).catch(({text}) => {
-                this.$showToast(text) // TODO: Nem mindenre kell errort dobni
+            }).catch(({status, text}) => {
+
+                if (status === 404) {
+                    // TODO: No valid timeframe available
+                } else {
+                    this.$showToast(text) // API call failed
+                }
+
             })
         },
         smartFetchRequired() { // Supposed to be called on pageload
@@ -26,7 +32,7 @@ export const initialInfoFetchMixin = {
                         this.fetchPrivateInfo()
                     })
                 }).catch(({text}) => {
-                    this.$showToast(text)
+                    this.$showToast(text) // API call failed
                 })
 
             }

@@ -35,7 +35,7 @@ export default {
       this.hugsLoading = false
     }).catch(({text}) => {
       this.hugsLoading = false
-      this.$showToast(text) // TODO: ez is fos
+      this.$showToast(text) // API Call failed
     })
   }
 }

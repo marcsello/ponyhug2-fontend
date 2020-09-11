@@ -75,17 +75,30 @@ export default {
         this.submitPending = true
 
         this.$api.performHug(this.form.key).then((hug) => {
+          this.$showToast("Új pónit öleltél meg!", "success", false)
           this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
-        }).catch(({text}) => {
-          this.$showToast(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
+
+        }).catch(({status, text}) => {
           this.submitPending = false
+
+          switch (status) {
+            case 409:
+              this.$showToast(text, 'user_error')
+              break;
+            case 404:
+              this.$showToast(text, 'user_error')
+              break;
+            default:
+              this.$showToast(text)
+          }
+
         })
 
       }
     }
   },
   watch: {
-    'form.key': function() {
+    'form.key': function () {
       if (this.inputGood !== null) {
         this.inputGood = this.form.key.length === 10
       }

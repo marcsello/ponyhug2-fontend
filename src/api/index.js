@@ -156,6 +156,7 @@ export default new class {
         return this._performApiCall('post', '/hugs', {key}, true, 201, {
             423: "A játék jelenleg inaktív",
             409: "Ezt a pónit már megölelted",
+            404: "Érvénytelen kód",
             ...COMMON_ERROR_CODES
         })
     }
