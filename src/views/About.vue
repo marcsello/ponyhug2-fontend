@@ -25,7 +25,7 @@
         <h2>Köszönet</h2>
         <div class="text-center">
           <div class="my-2">
-            <h4>Rlacko</h4>
+            <h4>rlacko</h4>
             <p>Ki hitte volna, hogy ilyen nehéz footert csinálni?</p>
           </div>
           <div class="my-2">
