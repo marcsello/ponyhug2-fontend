@@ -15,7 +15,7 @@
         <b-card title="Bencee" img-src="@/assets/bencee.png" img-right class="my-2">
           <span class="text-muted">Content, Design</span>
         </b-card>
-        <b-card title="Tormakris" img-src="https://placekitten.com/300/300" img-left class="my-2">
+        <b-card title="Tormakris" img-src="@/assets/tormakris.png" img-left class="my-2">
           <span class="text-muted">DevOps, Backend</span>
         </b-card>
       </b-col>
