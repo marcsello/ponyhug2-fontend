@@ -33,6 +33,10 @@
             <p>Piknik nélkül mihez kezdenénk?</p>
           </div>
           <div class="my-2">
+            <h4>Shiron</h4>
+            <p>A túlórázó tesztelő</p>
+          </div>
+          <div class="my-2">
             <h4>Amcsi</h4>
             <p>Kellett egy jó domain</p>
           </div>
