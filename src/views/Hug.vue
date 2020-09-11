@@ -3,39 +3,42 @@
     <b-row>
       <b-col class="my-3 text-center">
 
-          <h1>
-            Ölelés
-          </h1>
-          <p>
-            Ha nincs QR kód olvasód ide írd be a kódot!
-          </p>
+        <h1>
+          Ölelés
+        </h1>
+        <p>
+          Ha nincs QR kód olvasód ide írd be a kódot!
+        </p>
 
       </b-col>
     </b-row>
     <b-row>
       <b-col class="my-3">
-        <div class="px-5">
-          <b-form @submit.prevent="onSubmit">
-            <b-form-group
-                id="input-group-code"
-                label-for="input-code"
-                description="A kódot megtalálod a papíron a QR kód alatt"
-            >
-              <b-form-input
-                  id="input-code"
-                  v-model="form.code"
-                  type="text"
-                  required
-                  placeholder="Kód: XXXXXXXXXX"
-              ></b-form-input>
-            </b-form-group>
+        <b-overlay :show="submitPending" rounded="sm">
+          <div class="px-5">
+            <b-form @submit.prevent="onSubmit">
+              <b-form-group
+                  id="input-group-code"
+                  label-for="input-code"
+                  description="A kódot megtalálod a papíron a QR kód alatt"
+              >
+                <b-form-input
+                    id="input-code"
+                    v-model="form.key"
+                    type="text"
+                    required
+                    placeholder="Kód: XXXXXXXXXX"
+                    :disabled="submitPending"
+                ></b-form-input>
+              </b-form-group>
 
-            <div class="text-center py-3">
-              <b-button type="submit" variant="primary">Ölelés!</b-button>
-            </div>
+              <div class="text-center py-3">
+                <b-button type="submit" variant="primary" :disabled="submitPending">Ölelés!</b-button>
+              </div>
 
-          </b-form>
-        </div>
+            </b-form>
+          </div>
+        </b-overlay>
       </b-col>
     </b-row>
   </div>
@@ -47,12 +50,21 @@ export default {
   data() {
     return {
       form: {
-        input: ""
-      }
+        key: ""
+      },
+      submitPending: false
     }
   },
   methods: {
     onSubmit() {
+      this.submitPending = true
+
+      this.$api.performHug(this.form.key).then((hug) => {
+        this.$router.push({ name: 'Pony', params: { id: hug.pony.id }})
+      }).catch(({text}) => {
+        this.$showError(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
+        this.submitPending = false
+      })
 
     }
   }

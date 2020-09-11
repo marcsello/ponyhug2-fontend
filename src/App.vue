@@ -28,13 +28,31 @@ export default {
     Navbar
   },
   created() {
+    // Recieve player data
     if (this.$api.haveToken) {
       this.$api.getMyInfo().then((playerdata) => {
         this.$store.dispatch('storePlayerData', playerdata)
       }).catch(({text}) => {
         this.$showError(text)
       })
+
+
+      // Get total ponies
+      this.$api.getGameStat().then(({ponies_count}) => {
+        this.$store.dispatch('storeTotalPonies', ponies_count)
+      }).catch(({text}) => {
+        this.$showError(text) // TODO: Nem mindenre kell errort dobni
+      })
+
     }
+
+    // Get timeframe
+    this.$api.getCurrentTimeframe().then((timeframe) => {
+      this.$store.dispatch('storeTimeframe', timeframe)
+    }).catch(({text}) => {
+      this.$showError(text) // TODO: Nem mindenre kell errort dobni
+    })
+
 
   }
 }

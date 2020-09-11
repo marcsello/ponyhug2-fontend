@@ -18,7 +18,7 @@ export default {
     instantUpdate() {
       this.$api.getLeaderStat().then(({hug_counter}) => {
         this.leaderScore = hug_counter
-      })
+      }) // TODO: le kellene kezelni az errorokat
     }
   },
   created() {
