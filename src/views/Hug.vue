@@ -56,14 +56,18 @@
 </template>
 
 <script>
-
+import {leaderScoreUpdaterMixin} from '@/mixins'
 import GametimeWarning from '@/components/GametimeWarning'
+
 
 export default {
   name: "Hug",
   components: {
     GametimeWarning
   },
+  mixins: [
+    leaderScoreUpdaterMixin
+  ],
   data() {
     return {
       form: {
@@ -88,6 +92,7 @@ export default {
         this.submitPending = true
 
         this.$api.performHug(this.form.key).then((hug) => {
+          this.updateLeaderScore() // In case we were the leader
           this.$showToast("Új pónit öleltél meg!", "success", false)
           this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
 
