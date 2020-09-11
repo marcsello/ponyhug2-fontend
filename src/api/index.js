@@ -40,7 +40,9 @@ export default new class {
 
             if (precheckToken && !this.haveToken) {
                 return reject({
-                    text: "Nem vagy regisztrálva!"
+                    status: null,
+                    text: "Nem vagy regisztrálva!",
+                    data: null
                 })
             }
 
@@ -52,7 +54,9 @@ export default new class {
                     return resolve(response.data)
                 } else {
                     return reject({
-                        text: errorTexts[response.status] || "Hálózati vagy szerver hiba. Próbáld újra később!"
+                        status: response.status,
+                        text: errorTexts[response.status] || "Hálózati vagy szerver hiba. Próbáld újra később!",
+                        data: response.data
                     })
                 }
 
@@ -63,7 +67,9 @@ export default new class {
                     return resolve(error.response.data)
                 } else {
                     return reject({
-                        text: errorTexts[error.response.status] || "Hálózati vagy szerver hiba. Próbáld újra később!"
+                        status: error.response.status,
+                        text: errorTexts[error.response.status] || "Hálózati vagy szerver hiba. Próbáld újra később!",
+                        data: error.response.data
                     })
                 }
 
