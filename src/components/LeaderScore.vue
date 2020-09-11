@@ -6,30 +6,27 @@
 </template>
 
 <script>
+
+import {leaderScoreUpdaterMixin} from '@/mixins'
+
 export default {
   name: "LeaderScore",
+  mixins: [
+    leaderScoreUpdaterMixin
+  ],
   data() {
     return {
       timer: null
     }
   },
-  methods: {
-    instantUpdate() {
-      this.$api.getLeaderStat().then(({hug_counter}) => {
-        this.$store.dispatch('storeLeaderScore', hug_counter)
-      }).catch(() => {
-        // Errors are ignored
-      })
-    }
-  },
   created() {
     this.timer = setInterval(() => {
-      this.instantUpdate()
+      this.updateLeaderScore()
     }, 30000) // 30sec
   },
   mounted() { // it seems like that v-if buzerates mounted()... this is sufficent for now
     if (this.$store.state.playerdata.registered) {
-      this.instantUpdate()
+      this.updateLeaderScore()
     }
   },
   beforeDestroy() {

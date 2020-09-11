@@ -42,3 +42,16 @@ export const initialInfoFetchMixin = {
         }
     }
 }
+
+
+export const leaderScoreUpdaterMixin = {
+    methods: {
+        updateLeaderScore() {
+            this.$api.getLeaderStat().then(({hug_counter}) => {
+                this.$store.dispatch('storeLeaderScore', hug_counter)
+            }).catch(() => {
+                // Errors are ignored
+            })
+        }
+    }
+}
