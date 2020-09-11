@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="ponyValid === true">
     <b-row class="my-2">
       <b-col>
         <b-card :title="ponydata.name" class="text-center">
@@ -34,6 +34,9 @@
       </b-col>
     </b-row>
   </div>
+  <div v-else-if="ponyValid === false">
+    <b-alert variant="primary" show>Úgy tűnik, ezt a pónit nem ölelted még meg. Keresd meg, és adj neki egy ölelést!</b-alert>
+  </div>
 </template>
 
 <script>
@@ -53,7 +56,8 @@ export default {
         "source": null,
         "story": null
       },
-      ponyLoading: true
+      ponyLoading: true,
+      ponyValid: null
     }
   },
   mounted() {
@@ -61,11 +65,12 @@ export default {
       this.$api.getHuggedPony(this.$route.params.id).then((ponydata) => {
         this.ponydata = ponydata
         this.ponyLoading = false
+        this.ponyValid = true
       }).catch(({status, text}) => {
         this.ponyLoading = false
 
         if (status === 404) {
-          // TODO: What to do
+          this.ponyValid = false
         } else {
           this.$showToast(text) // API Call failed
         }
