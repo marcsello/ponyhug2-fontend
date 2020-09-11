@@ -112,6 +112,10 @@ export default new class {
         return this._performApiCall('get', '/stats/leader', null, true, 200)
     }
 
+    getGameStat() {
+        return this._performApiCall('get', '/stats/game', null, true, 200)
+    }
+
     getHuggedPonies() {
         return this._performApiCall('get', '/ponies', null, true, 200)
     }
@@ -135,5 +139,7 @@ export default new class {
             ...COMMON_ERROR_CODES
         })
     }
+
+
 
 }
