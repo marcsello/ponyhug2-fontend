@@ -30,7 +30,15 @@
                     placeholder="Kód: XXXXXXXXXX"
                     :disabled="submitPending"
                     autocomplete="off"
+                    :state="inputGood"
+                    aria-describedby="input-code-live-feedback"
                 ></b-form-input>
+
+                <b-form-invalid-feedback id="input-code-live-feedback">
+                  Egy póni kód pontosan 10 karakter!
+                </b-form-invalid-feedback>
+
+
               </b-form-group>
 
               <div class="text-center py-3">
@@ -53,21 +61,36 @@ export default {
       form: {
         key: ""
       },
+      inputGood: null,
       submitPending: false
     }
   },
   methods: {
     onSubmit() {
-      this.submitPending = true
 
-      this.$api.performHug(this.form.key).then((hug) => {
-        this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
-      }).catch(({text}) => {
-        this.$showToast(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
-        this.submitPending = false
-      })
+      if (this.form.key.length !== 10) {
+        this.inputGood = false
+      } else {
 
+        this.submitPending = true
+
+        this.$api.performHug(this.form.key).then((hug) => {
+          this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
+        }).catch(({text}) => {
+          this.$showToast(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
+          this.submitPending = false
+        })
+
+      }
     }
+  },
+  watch: {
+    'form.key': function() {
+      if (this.inputGood !== null) {
+        this.inputGood = this.form.key.length === 10
+      }
+    }
+
   },
   mounted() {
     if (this.$route.hash) {
