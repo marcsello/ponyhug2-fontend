@@ -2,10 +2,10 @@
   <div>
     <b-row class="my-2">
       <b-col>
-        <b-card title="Pónika" class="text-center">
-          <b-img src="https://vignette.wikia.nocookie.net/mlp/images/f/f4/Rose_id_S2E19.png" fluid-grow/>
+        <b-card :title="ponydata.name" class="text-center">
+          <b-img :src="ponydata.image" fluid-grow/>
           <p class="py-3">
-            Lorem ipsum dolor sit amet
+            {{ ponydata.story }}
           </p>
         </b-card>
       </b-col>
@@ -17,28 +17,16 @@
           <tbody>
           <tr>
             <th scope="row" class="align-middle">Először ölelte</th>
-            <td>Kékmellény</td>
+            <td>{{ ponydata.first_hug.playername }}</td>
           </tr>
           <tr>
             <th scope="row" class="align-middle">Összesen megölelték</th>
-            <td>13</td>
+            <td>{{ ponydata.hugs.length }}</td>
           </tr>
           <tr>
             <th scope="row" class="align-middle">Eddig megölelték</th>
             <td>
-              <div>Kékmellény</div>
-              <div>Sajtiiiiiiij</div>
-              <div>A Nagy és Hatalmas Adept</div>
-              <div>Kancsár</div>
-              <div>ItchyStomach</div>
-              <div>Simon</div>
-              <div>Rainbow_Dash</div>
-              <div>ballwa</div>
-              <div>Nite</div>
-              <div>zippax</div>
-              <div>PizzásCsiga</div>
-              <div>marcsellofasz</div>
-              <div>asdasdasdasdas</div>
+              <div v-for="(hugger, index) in ponydata.hugs" :key="index">{{ hugger }}</div>
             </td>
           </tr>
           </tbody>
@@ -50,7 +38,35 @@
 
 <script>
 export default {
-  name: "Pony"
+  name: "Pony",
+  data() {
+    return {
+      ponydata: {
+        "first_hug": {
+          "playername": null,
+          "timestamp": null
+        },
+        "hugs": [],
+        "id": null,
+        "image": null,
+        "name": null,
+        "source": null,
+        "story": null
+      },
+      ponyLoading: true
+    }
+  },
+  mounted() {
+    if (this.$route.params.id) {
+      this.$api.getHuggedPony(this.$route.params.id).then((ponydata) => {
+        this.ponydata = ponydata
+        this.ponyLoading = false
+      }).catch(({text}) => {
+        this.ponyLoading = false
+        this.$showError(text) // TODO: ez is fos
+      })
+    }
+  }
 }
 </script>
 
