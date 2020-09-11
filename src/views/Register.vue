@@ -27,6 +27,7 @@
                   type="text"
                   required
                   placeholder="Játékos név"
+                  autocomplete="off"
               ></b-form-input>
             </b-form-group>
 

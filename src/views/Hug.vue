@@ -29,6 +29,7 @@
                     required
                     placeholder="Kód: XXXXXXXXXX"
                     :disabled="submitPending"
+                    autocomplete="off"
                 ></b-form-input>
               </b-form-group>
 
