@@ -2,12 +2,12 @@
   <div>
     <b-row>
       <b-col>
-        <herd-stats/>
+        <herd-stats :hug-count="hugs.length"/>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <herd-list/>
+        <herd-list :hugs="hugs"/>
       </b-col>
     </b-row>
   </div>
@@ -22,6 +22,21 @@ export default {
   components: {
     HerdStats,
     HerdList
+  },
+  data() {
+    return {
+      hugs: [],
+      hugsLoading: true
+    }
+  },
+  mounted() {
+    this.$api.getHugs().then((hugs) => {
+      this.hugs = hugs
+      this.hugsLoading = false
+    }).catch(({text}) => {
+      this.hugsLoading = false
+      this.$showError(text) // TODO: ez is fos
+    })
   }
 }
 </script>

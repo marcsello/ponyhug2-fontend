@@ -1,13 +1,18 @@
 <template>
-  <b-list-group-item to="/herd/2">
-    <b-img fluid src="https://vignette.wikia.nocookie.net/mlp/images/b/b1/Trixie_ID_S6E6.png" class="w-25 pr-3"/>
-    <span class="pony_name">Lorem Ipsum Pony</span>
+  <b-list-group-item :to="{name: 'Pony', params: {id}}">
+    <b-img fluid :src="imgSrc" class="w-25 pr-3"/>
+    <span class="pony_name">{{ name }}</span>
   </b-list-group-item>
 </template>
 
 <script>
 export default {
-  name: "SmallPonyCard"
+  name: "SmallPonyCard",
+  props: {
+    id: Number,
+    imgSrc: String,
+    name: String
+  }
 }
 </script>
 

@@ -38,8 +38,8 @@ export default {
 
 
       // Get total ponies
-      this.$api.getGameStat().then(({ponies_count}) => {
-        this.$store.dispatch('storeTotalPonies', ponies_count)
+      this.$api.getGameStat().then(({total_ponies}) => {
+        this.$store.dispatch('storeTotalPonies', total_ponies)
       }).catch(({text}) => {
         this.$showError(text) // TODO: Nem mindenre kell errort dobni
       })
