@@ -43,7 +43,7 @@ Vue.prototype.$showToast = function (text, type = 'error') {
             break;
     }
 
-    this.$bvToast.toast(text, {
+    this.$root.$bvToast.toast(text, {
         ...options,
         toaster: 'b-toaster-top-center',
         solid: true,
