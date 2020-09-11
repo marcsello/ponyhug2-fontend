@@ -60,12 +60,18 @@ export default {
       this.submitPending = true
 
       this.$api.performHug(this.form.key).then((hug) => {
-        this.$router.push({ name: 'Pony', params: { id: hug.pony.id }})
+        this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
       }).catch(({text}) => {
         this.$showError(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
         this.submitPending = false
       })
 
+    }
+  },
+  mounted() {
+    if (this.$route.hash) {
+      this.form.key = this.$route.hash.substr(1)
+      this.onSubmit()
     }
   }
 }
