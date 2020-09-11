@@ -1,6 +1,6 @@
 <template>
   <b-jumbotron header="Istálló" lead="Eddig megölelt pónik:" class="text-center">
-    <p class="herd-counter">{{ hugCount }} / {{ $store.state.total_ponies }}</p>
+    <p class="herd-counter">{{ herdCounterText }}</p>
     <b-progress :value="hugCount" :max="$store.state.total_ponies" animated></b-progress>
   </b-jumbotron>
 </template>
@@ -8,8 +8,18 @@
 <script>
 export default {
   name: "HerdStats",
-  props:  {
-    hugCount: Number
+  props: {
+    hugCount: Number,
+    hugsLoading: Boolean
+  },
+  computed: {
+    herdCounterText() {
+      if (this.hugsLoading) {
+        return '...'
+      } else {
+        return this.hugCount + '/' + this.$store.state.total_ponies
+      }
+    }
   }
 }
 </script>

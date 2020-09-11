@@ -37,6 +37,9 @@
   <div v-else-if="ponyValid === false">
     <b-alert variant="primary" show>Úgy tűnik, ezt a pónit nem ölelted még meg. Keresd meg, és adj neki egy ölelést!</b-alert>
   </div>
+  <div v-else-if="ponyLoading" class="text-center">
+    <b-spinner label="Loading..."></b-spinner>
+  </div>
 </template>
 
 <script>

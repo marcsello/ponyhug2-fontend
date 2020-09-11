@@ -2,12 +2,14 @@
   <div>
     <b-row>
       <b-col>
-        <herd-stats :hug-count="hugs.length"/>
+        <b-overlay :show="hugsLoading" rounded="sm">
+          <herd-stats :hug-count="hugs.length" :hugs-loading="hugsLoading"/>
+        </b-overlay>
       </b-col>
     </b-row>
     <b-row>
       <b-col>
-        <herd-list :hugs="hugs"/>
+        <herd-list :hugs="hugs" v-if="!hugsLoading"/>
       </b-col>
     </b-row>
   </div>
