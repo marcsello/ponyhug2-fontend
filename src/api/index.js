@@ -63,14 +63,28 @@ export default new class {
 
             }).catch((error) => {
 
-                if (error.response.status === expectedStatus) {
-                    return resolve(error.response.data)
-                } else {
+                if (!error.response) { // Network error (CORS?)
+
+
                     return reject({
-                        status: error.response.status,
-                        text: errorTexts[error.response.status] || "Hálózati vagy szerver hiba. Próbáld újra később!",
-                        data: error.response.data
+                        status: null,
+                        text: "Hálózati hiba. Próbáld újra később!",
+                        data: null
                     })
+
+                } else {  // Server side errror
+
+                    if (error.response.status === expectedStatus) {
+                        return resolve(error.response.data)
+                    } else {
+
+                        return reject({
+                            status: error.response.status,
+                            text: errorTexts[error.response.status] || "Szerver oldali hiba. Próbáld újra később!",
+                            data: error.response.data
+                        })
+
+                    }
                 }
 
             })
@@ -145,7 +159,6 @@ export default new class {
             ...COMMON_ERROR_CODES
         })
     }
-
 
 
 }
