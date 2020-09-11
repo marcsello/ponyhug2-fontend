@@ -3,6 +3,8 @@
     <b-row>
       <b-col class="my-3 text-center">
 
+        <gametime-warning/>
+
         <h1>
           Ölelés
         </h1>
@@ -28,7 +30,7 @@
                     type="text"
                     required
                     placeholder="Kód: XXXXXXXXXX"
-                    :disabled="submitPending"
+                    :disabled="submitPending "
                     autocomplete="off"
                     :state="inputGood"
                     aria-describedby="input-code-live-feedback"
@@ -42,7 +44,7 @@
               </b-form-group>
 
               <div class="text-center py-3">
-                <b-button type="submit" variant="primary" :disabled="submitPending">Ölelés!</b-button>
+                <b-button type="submit" variant="primary" :disabled="submitPending || (!$store.getters.isInValidTimeframe)">Ölelés!</b-button>
               </div>
 
             </b-form>
@@ -54,8 +56,14 @@
 </template>
 
 <script>
+
+import GametimeWarning from '@/components/GametimeWarning'
+
 export default {
   name: "Hug",
+  components: {
+    GametimeWarning
+  },
   data() {
     return {
       form: {
@@ -67,6 +75,11 @@ export default {
   },
   methods: {
     onSubmit() {
+
+      /* TODO: Timeframe is not checked here on purpose, because this function might be called before the timeframe is fetched
+        Altrough the user experience might be better if it were checked, but the server refuses the request anyways
+        Since I'm short on time I'm going to ignore this issue for now
+       */
 
       if (this.form.key.length !== 10) {
         this.inputGood = false

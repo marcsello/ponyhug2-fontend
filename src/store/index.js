@@ -12,7 +12,8 @@ export default new Vuex.Store({
         },
         timeframe: {
             begin_timestamp: null,
-            end_timestamp: null
+            end_timestamp: null,
+            fetched: false
         },
         total_ponies: null,
         leader_score: null
@@ -29,7 +30,8 @@ export default new Vuex.Store({
         storeTimeframe(state, timeframe) {
             state.timeframe = {
                 begin_timestamp: new Date(timeframe.begin_timestamp),
-                end_timestamp: new Date(timeframe.end_timestamp)
+                end_timestamp: new Date(timeframe.end_timestamp),
+                fetched: true
             }
         },
         storeTotalPonies(state, total_ponies) {
@@ -47,6 +49,9 @@ export default new Vuex.Store({
         storeTimeframe({commit}, timeframe) {
             commit('storeTimeframe', timeframe)
         },
+        storeTimeframeOutside({commit}) {
+            commit('storeTimeframe', {begin_timestamp : null, end_timestamp: null})
+        },
         storeTotalPonies({commit}, total_ponies) {
             commit('storeTotalPonies', total_ponies)
         },
@@ -57,5 +62,19 @@ export default new Vuex.Store({
 
     modules: {},
 
-    getters: {}
+    getters: {
+        isInValidTimeframe(state) {
+
+            if (!state.timeframe.fetched) { // Dunno yet
+                return false
+            }
+
+            if (state.timeframe.end_timestamp && state.timeframe.begin_timestamp) {
+                let now = new Date()
+                return (state.timeframe.end_timestamp > now) && (state.timeframe.begin_timestamp < now)
+            } else {
+                return false
+            }
+        }
+    }
 })

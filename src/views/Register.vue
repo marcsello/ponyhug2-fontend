@@ -2,7 +2,7 @@
   <div>
     <b-row>
       <b-col class="my-3 text-center">
-
+        <gametime-warning/>
         <h1>
           Regisztráció
         </h1>
@@ -34,7 +34,7 @@
               </b-form-group>
 
               <div class="text-center py-3">
-                <b-button type="submit" variant="primary" :disabled="registerPending">Induljon a játék!</b-button>
+                <b-button type="submit" variant="primary" :disabled="registerPending || (!this.$store.getters.isInValidTimeframe)">Induljon a játék!</b-button>
               </div>
 
             </b-form>
@@ -47,6 +47,7 @@
 
 <script>
 
+import GametimeWarning from '@/components/GametimeWarning'
 import {initialInfoFetchMixin} from '@/mixins'
 
 export default {
@@ -54,6 +55,9 @@ export default {
   mixins: [
     initialInfoFetchMixin
   ],
+  components: {
+    GametimeWarning
+  },
   data() {
     return {
       form: {
@@ -64,6 +68,12 @@ export default {
   },
   methods: {
     onSubmit() {
+
+      if (!this.$store.getters.isInValidTimeframe) {
+        // game time over
+        return
+      }
+
       this.registerPending = true
       this.$api.performRegister(this.form.name).then((partial_player_data) => {
 

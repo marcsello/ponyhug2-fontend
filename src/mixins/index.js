@@ -15,7 +15,8 @@ export const initialInfoFetchMixin = {
             }).catch(({status, text}) => {
 
                 if (status === 404) {
-                    // TODO: No valid timeframe available
+                    // No valid timeframe available
+                    this.$store.dispatch('storeTimeframeOutside')
                 } else {
                     this.$showToast(text) // API call failed
                 }
