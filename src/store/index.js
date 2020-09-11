@@ -27,8 +27,8 @@ export default new Vuex.Store({
         },
         storeTimeframe(state, timeframe) {
             state.timeframe = {
-                begin_timestamp: timeframe.begin_timestamp,
-                end_timestamp: timeframe.end_timestamp
+                begin_timestamp: new Date(timeframe.begin_timestamp),
+                end_timestamp: new Date(timeframe.end_timestamp)
             }
         },
         storeTotalPonies(state, total_ponies) {
