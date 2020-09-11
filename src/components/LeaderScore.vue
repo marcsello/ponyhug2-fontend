@@ -1,7 +1,7 @@
 <template>
-  <b-nav-text class="text-white" v-if="leaderScore">
+  <b-nav-text class="text-white" v-if="$store.state.leader_score !== null">
     <b-icon icon="trophy"/>
-    {{ leaderScore }}
+    {{ $store.state.leader_score }}
   </b-nav-text>
 </template>
 
@@ -10,14 +10,13 @@ export default {
   name: "LeaderScore",
   data() {
     return {
-      leaderScore: null,
       timer: null
     }
   },
   methods: {
     instantUpdate() {
       this.$api.getLeaderStat().then(({hug_counter}) => {
-        this.leaderScore = hug_counter
+        this.$store.dispatch('storeLeaderScore', hug_counter)
       }).catch(() => {
         // Errors are ignored
       })

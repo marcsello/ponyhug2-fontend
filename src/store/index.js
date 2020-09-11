@@ -14,7 +14,8 @@ export default new Vuex.Store({
             begin_timestamp: null,
             end_timestamp: null
         },
-        total_ponies: null
+        total_ponies: null,
+        leader_score: null
     },
 
     mutations: {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
         },
         storeTotalPonies(state, total_ponies) {
             state.total_ponies = total_ponies
+        },
+        storeLeaderScore(state, leader_score) {
+            state.leader_score = leader_score
         }
     },
 
@@ -45,6 +49,9 @@ export default new Vuex.Store({
         },
         storeTotalPonies({commit}, total_ponies) {
             commit('storeTotalPonies', total_ponies)
+        },
+        storeLeaderScore({commit}, leader_score) {
+            commit('storeLeaderScore', leader_score)
         }
     },
 
