@@ -19,7 +19,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$api = api
 
-Vue.prototype.$showToast = function (text, type = 'error') {
+Vue.prototype.$showToast = function (text, type = 'error', local=true) {
 
     let options = {}
     switch (type) {
@@ -43,11 +43,13 @@ Vue.prototype.$showToast = function (text, type = 'error') {
             break;
     }
 
-    this.$root.$bvToast.toast(text, {
+    const bvToast = local ? this.$bvToast : this.$root.$bvToast
+
+    bvToast.toast(text, {
         ...options,
         toaster: 'b-toaster-top-center',
         solid: true,
-        appendToast: false,
+        appendToast: false
     })
 }
 
