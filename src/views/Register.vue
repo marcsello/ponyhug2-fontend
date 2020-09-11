@@ -62,7 +62,7 @@ export default {
         })
 
       }).catch(({text}) => {
-        this.$showError(text)
+        this.$showToast(text)
       })
     }
   }

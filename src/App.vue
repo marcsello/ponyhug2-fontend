@@ -33,7 +33,7 @@ export default {
       this.$api.getMyInfo().then((playerdata) => {
         this.$store.dispatch('storePlayerData', playerdata)
       }).catch(({text}) => {
-        this.$showError(text)
+        this.$showToast(text)
       })
 
 
@@ -41,7 +41,7 @@ export default {
       this.$api.getGameStat().then(({total_ponies}) => {
         this.$store.dispatch('storeTotalPonies', total_ponies)
       }).catch(({text}) => {
-        this.$showError(text) // TODO: Nem mindenre kell errort dobni
+        this.$showToast(text) // TODO: Nem mindenre kell errort dobni
       })
 
     }
@@ -50,7 +50,7 @@ export default {
     this.$api.getCurrentTimeframe().then((timeframe) => {
       this.$store.dispatch('storeTimeframe', timeframe)
     }).catch(({text}) => {
-      this.$showError(text) // TODO: Nem mindenre kell errort dobni
+      this.$showToast(text) // TODO: Nem mindenre kell errort dobni
     })
 
 

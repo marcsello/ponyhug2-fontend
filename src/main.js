@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 
 import App from './App.vue'
 import router from './router'
@@ -19,18 +19,40 @@ Vue.config.productionTip = false
 
 Vue.prototype.$api = api
 
-Vue.prototype.$showError = function(text, user_error = false) {
-  this.$bvToast.toast(text, {
-    title: user_error ? "Hopsz" : "Hiba történt",
-    toaster: 'b-toaster-top-center',
-    solid: true,
-    appendToast: false,
-    variant: user_error ? "warning" : "danger"
-  })
+Vue.prototype.$showToast = function (text, type = 'error') {
+
+    let options = {}
+    switch (type) {
+        case "error":
+            options = {
+                title: "Hiba történt!",
+                variant: "danger"
+            }
+            break;
+        case "user_error":
+            options = {
+                title: "Hopsz...",
+                variant: "warning"
+            }
+            break;
+        case "success":
+            options = {
+                title: "Yay!",
+                variant: "success"
+            }
+            break;
+    }
+
+    this.$bvToast.toast(text, {
+        ...options,
+        toaster: 'b-toaster-top-center',
+        solid: true,
+        appendToast: false,
+    })
 }
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')

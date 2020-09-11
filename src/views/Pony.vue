@@ -63,7 +63,7 @@ export default {
         this.ponyLoading = false
       }).catch(({text}) => {
         this.ponyLoading = false
-        this.$showError(text) // TODO: ez is fos
+        this.$showToast(text) // TODO: ez is fos
       })
     }
   }

@@ -63,7 +63,7 @@ export default {
       this.$api.performHug(this.form.key).then((hug) => {
         this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
       }).catch(({text}) => {
-        this.$showError(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
+        this.$showToast(text) // TODO: kezdem úgyérezni, hogy ez nagyon fos koncepció
         this.submitPending = false
       })
 
