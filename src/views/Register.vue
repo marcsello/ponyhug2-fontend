@@ -14,6 +14,7 @@
     </b-row>
     <b-row>
       <b-col class="my-3">
+        <b-overlay :show="registerPending" rounded="sm">
         <div>
           <b-form @submit.prevent="onSubmit">
             <b-form-group
@@ -28,15 +29,17 @@
                   required
                   placeholder="Játékos név"
                   autocomplete="off"
+                  :disabled="registerPending"
               ></b-form-input>
             </b-form-group>
 
             <div class="text-center py-3">
-              <b-button type="submit" variant="primary">Induljon a játék!</b-button>
+              <b-button type="submit" variant="primary" :disabled="registerPending">Induljon a játék!</b-button>
             </div>
 
           </b-form>
         </div>
+        </b-overlay>
       </b-col>
     </b-row>
   </div>
@@ -55,11 +58,13 @@ export default {
     return {
       form: {
         name: ""
-      }
+      },
+      registerPending: false
     }
   },
   methods: {
     onSubmit() {
+      this.registerPending = true
       this.$api.performRegister(this.form.name).then((partial_player_data) => {
 
         this.$store.dispatch('storePlayerData', partial_player_data).then(() => {
@@ -68,6 +73,7 @@ export default {
         })
 
       }).catch(({text}) => {
+        this.registerPending = false
         this.$showToast(text)
       })
     }
