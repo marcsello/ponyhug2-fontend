@@ -9,7 +9,12 @@ export default new Vuex.Store({
             name: null,
             is_admin: null,
             registered: false
-        }
+        },
+        timeframe: {
+            begin_timestamp: null,
+            end_timestamp: null
+        },
+        total_ponies: null
     },
 
     mutations: {
@@ -19,12 +24,27 @@ export default new Vuex.Store({
                 is_admin: playerdata.is_admin,
                 registered: true
             }
+        },
+        storeTimeframe(state, timeframe) {
+            state.timeframe = {
+                begin_timestamp: timeframe.begin_timestamp,
+                end_timestamp: timeframe.end_timestamp
+            }
+        },
+        storeTotalPonies(state, total_ponies) {
+            state.total_ponies = total_ponies
         }
     },
 
     actions: {
         storePlayerData({commit}, playerdata) {
             commit('storePlayerData', playerdata)
+        },
+        storeTimeframe({commit}, timeframe) {
+            commit('storeTimeframe', timeframe)
+        },
+        storeTotalPonies({commit}, total_ponies) {
+            commit('storeTotalPonies', total_ponies)
         }
     },
 
