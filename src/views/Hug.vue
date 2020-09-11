@@ -9,7 +9,7 @@
           Ölelés
         </h1>
         <p>
-          Ha nincs QR kód olvasód ide írd be a kódot!
+          Ha nincs QR kód olvasód ide írd be a kulcsot!
         </p>
 
       </b-col>
@@ -22,14 +22,14 @@
               <b-form-group
                   id="input-group-code"
                   label-for="input-code"
-                  description="A kódot megtalálod a papíron a QR kód alatt"
+                  description="A kulcsot megtalálod a papíron a QR kód alatt"
               >
                 <b-form-input
                     id="input-code"
                     v-model="form.key"
                     type="text"
                     required
-                    placeholder="Kód: XXXXXXXXXX"
+                    placeholder="Kulcs: XXXXXXXXXX"
                     :disabled="submitPending "
                     autocomplete="off"
                     :state="inputGood"
@@ -37,7 +37,7 @@
                 ></b-form-input>
 
                 <b-form-invalid-feedback id="input-code-live-feedback">
-                  Egy póni kód pontosan 10 karakter!
+                  Egy póni kulcs pontosan 10 karakter!
                 </b-form-invalid-feedback>
 
 
