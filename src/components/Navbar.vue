@@ -9,7 +9,7 @@
       </b-navbar-brand>
 
 
-      <leader-score v-if="$store.state.playerdata.registered" />
+      <leader-score v-if="$store.state.playerdata.registered" /> <!-- this v-if delays the create and mount calls of the component -->
 
       <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
 

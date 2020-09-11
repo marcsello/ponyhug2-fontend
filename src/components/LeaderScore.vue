@@ -18,15 +18,20 @@ export default {
     instantUpdate() {
       this.$api.getLeaderStat().then(({hug_counter}) => {
         this.leaderScore = hug_counter
-      }) // TODO: le kellene kezelni az errorokat
+      }).catch(() => {
+        // Errors are ignored
+      })
     }
   },
   created() {
-
     this.timer = setInterval(() => {
       this.instantUpdate()
     }, 30000) // 30sec
-
+  },
+  mounted() { // it seems like that v-if buzerates mounted()... this is sufficent for now
+    if (this.$store.state.playerdata.registered) {
+      this.instantUpdate()
+    }
   },
   beforeDestroy() {
     clearInterval(this.timer)
