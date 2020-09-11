@@ -22,38 +22,19 @@
 import Navbar from "@/components/Navbar";
 import FooterContent from "@/components/FooterContent";
 
+import {initialInfoFetchMixin} from '@/mixins'
+
 export default {
   components: {
     FooterContent,
     Navbar
   },
+  mixins: [
+    initialInfoFetchMixin
+  ],
   created() {
     // Recieve player data
-    if (this.$api.haveToken) {
-      this.$api.getMyInfo().then((playerdata) => {
-        this.$store.dispatch('storePlayerData', playerdata)
-      }).catch(({text}) => {
-        this.$showToast(text)
-      })
-
-
-      // Get total ponies
-      this.$api.getGameStat().then(({total_ponies}) => {
-        this.$store.dispatch('storeTotalPonies', total_ponies)
-      }).catch(({text}) => {
-        this.$showToast(text) // TODO: Nem mindenre kell errort dobni
-      })
-
-    }
-
-    // Get timeframe
-    this.$api.getCurrentTimeframe().then((timeframe) => {
-      this.$store.dispatch('storeTimeframe', timeframe)
-    }).catch(({text}) => {
-      this.$showToast(text) // TODO: Nem mindenre kell errort dobni
-    })
-
-
+    this.smartFetchRequired()
   }
 }
 

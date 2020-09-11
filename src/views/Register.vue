@@ -44,8 +44,13 @@
 
 <script>
 
+import {initialInfoFetchMixin} from '@/mixins'
+
 export default {
-  name: "Hug",
+  name: "Register",
+  mixins: [
+    initialInfoFetchMixin
+  ],
   data() {
     return {
       form: {
@@ -58,6 +63,7 @@ export default {
       this.$api.performRegister(this.form.name).then((partial_player_data) => {
 
         this.$store.dispatch('storePlayerData', partial_player_data).then(() => {
+          this.fetchPrivateInfo() // Other info fetched automagically on pageload
           this.$router.push('/')
         })
 
