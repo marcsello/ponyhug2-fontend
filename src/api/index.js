@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = "https://hugs.hunbrony.hu/api/"
+const API_BASE_URL = "http://localhost:5000/"
 const LOCAL_STORAGE_KEY = "JWT"
 
 const COMMON_ERROR_CODES = {
@@ -159,6 +159,22 @@ export default new class {
             404: "Érvénytelen kód",
             ...COMMON_ERROR_CODES
         })
+    }
+
+    adminPerformPromote(key) {
+        return this._performApiCall('post', '/admin/promote', {key}, true, 204)
+    }
+
+    adminGetAllPonies() {
+        return this._performApiCall('get', '/admin/ponies', null, true, 200)
+    }
+
+    adminGetAllPlayers() {
+        return this._performApiCall('get', '/admin/players', null, true, 200)
+    }
+
+    adminGetAllTimeframes() {
+        return this._performApiCall('get', '/admin/timeframes', null, true, 200)
     }
 
 
