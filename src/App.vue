@@ -1,32 +1,63 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+
+    <navbar/>
+
+    <div id="content">
+      <b-container>
+        <router-view/>
+      </b-container>
     </div>
-    <router-view/>
+
+    <div id="footer">
+      <b-container>
+        <footer-content/>
+      </b-container>
+    </div>
+
   </div>
 </template>
 
+<script>
+import Navbar from "@/components/Navbar";
+import FooterContent from "@/components/FooterContent";
+
+import {initialInfoFetchMixin} from '@/mixins'
+
+export default {
+  components: {
+    FooterContent,
+    Navbar
+  },
+  mixins: [
+    initialInfoFetchMixin
+  ],
+  created() {
+    // Recieve player data
+    this.smartFetchRequired()
+  }
+}
+
+</script>
+
+
 <style>
+
+#content {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-#nav {
-  padding: 30px;
+#footer {
+  padding: 1em;
+  margin-top: auto;
+  background: #E9ECEF;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

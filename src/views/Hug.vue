@@ -1,0 +1,137 @@
+<template>
+  <div>
+    <b-row>
+      <b-col class="my-3 text-center">
+
+        <gametime-warning/>
+
+        <h1>
+          Ölelés
+        </h1>
+        <p>
+          Ha nincs QR kód olvasód ide írd be a kulcsot!
+        </p>
+
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col class="my-3">
+        <b-overlay :show="submitPending" rounded="sm">
+          <div class="px-5">
+            <b-form @submit.prevent="onSubmit">
+              <b-form-group
+                  id="input-group-code"
+                  label-for="input-code"
+                  description="A kulcsot megtalálod a papíron a QR kód alatt"
+              >
+                <b-form-input
+                    id="input-code"
+                    v-model="form.key"
+                    type="text"
+                    required
+                    placeholder="Kulcs: XXXXXXXXXX"
+                    :disabled="submitPending "
+                    autocomplete="off"
+                    :state="inputGood"
+                    aria-describedby="input-code-live-feedback"
+                ></b-form-input>
+
+                <b-form-invalid-feedback id="input-code-live-feedback">
+                  Egy póni kulcs pontosan 10 karakter!
+                </b-form-invalid-feedback>
+
+
+              </b-form-group>
+
+              <div class="text-center py-3">
+                <b-button type="submit" variant="primary" :disabled="submitPending || (!$store.getters.isInValidTimeframe)">Ölelés!</b-button>
+              </div>
+
+            </b-form>
+          </div>
+        </b-overlay>
+      </b-col>
+    </b-row>
+  </div>
+</template>
+
+<script>
+import {leaderScoreUpdaterMixin} from '@/mixins'
+import GametimeWarning from '@/components/GametimeWarning'
+
+
+export default {
+  name: "Hug",
+  components: {
+    GametimeWarning
+  },
+  mixins: [
+    leaderScoreUpdaterMixin
+  ],
+  data() {
+    return {
+      form: {
+        key: ""
+      },
+      inputGood: null,
+      submitPending: false
+    }
+  },
+  methods: {
+    onSubmit() {
+
+      /* TODO: Timeframe is not checked here on purpose, because this function might be called before the timeframe is fetched
+        Altrough the user experience might be better if it were checked, but the server refuses the request anyways
+        Since I'm short on time I'm going to ignore this issue for now
+       */
+
+      if (this.form.key.length !== 10) {
+        this.inputGood = false
+      } else {
+
+        this.submitPending = true
+
+        this.$api.performHug(this.form.key).then((hug) => {
+          this.updateLeaderScore() // In case we were the leader
+          this.$showToast("Új pónit öleltél meg!", "success", false)
+          this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
+
+        }).catch(({status, text}) => {
+          this.submitPending = false
+
+          switch (status) {
+            case 409:
+              this.$showToast(text, 'user_error')
+              break;
+            case 404:
+              this.$showToast(text, 'user_error')
+              break;
+            default:
+              this.$showToast(text)
+          }
+
+        })
+
+      }
+    }
+  },
+  watch: {
+    'form.key': function () {
+      if (this.inputGood !== null) {
+        this.inputGood = this.form.key.length === 10
+      }
+    }
+
+  },
+  mounted() {
+    if (this.$route.hash) {
+      this.form.key = this.$route.hash.substr(1)
+      this.onSubmit()
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>
