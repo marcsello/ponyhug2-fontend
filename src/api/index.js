@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = "https://hugs.hunbrony.hu/api/"
+const API_BASE_URL = process.env.VUE_APP_API_LOCATION
 const LOCAL_STORAGE_KEY = "JWT"
 
 const COMMON_ERROR_CODES = {
