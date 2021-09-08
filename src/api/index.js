@@ -93,11 +93,11 @@ export default new class {
 
     }
 
-    performRegister(playername) {
+    performRegister(name) {
 
         return new Promise((resolve, reject) => {
 
-            this._performApiCall('post', '/players', {playername}, false, 201, {
+            this._performApiCall('post', '/players', {name}, false, 201, {
                 422: "A név mező hiányos!",
                 409: "A név már foglalt!",
                 ...COMMON_ERROR_CODES
@@ -107,7 +107,8 @@ export default new class {
                 this._setupHTTPObject() // Update JWT token memes
                 return resolve({
                     name: data.name,
-                    is_admin: data.is_admin
+                    is_admin: data.is_admin,
+                    faction: data.faction
                     // Do not pass JWT token any further
                 })
 
@@ -132,15 +133,15 @@ export default new class {
         return this._performApiCall('get', '/stats/leader', null, true, 200)
     }
 
-    getGameStat() {
-        return this._performApiCall('get', '/stats/game', null, true, 200)
+    getFactionsStat() {
+        return this._performApiCall('get', '/stats/factions', null, true, 200)
     }
 
-    getHuggedPonies() {
-        return this._performApiCall('get', '/ponies', null, true, 200)
+    getTotalPonyCount() {
+        return this._performApiCall('get', '/ponies/count', null, true, 200)
     }
 
-    getHuggedPony(id) {
+    getPony(id) {
         return this._performApiCall('get', '/ponies/' + id, null, true, 200)
     }
 
@@ -155,7 +156,7 @@ export default new class {
     performHug(key) {
         return this._performApiCall('post', '/hugs', {key}, true, 201, {
             423: "A játék jelenleg inaktív",
-            409: "Ezt a pónit már megölelted",
+            200: "Ezt a pónit már megölelted", // This is not an error actually..
             404: "Érvénytelen kód",
             ...COMMON_ERROR_CODES
         })
@@ -165,16 +166,16 @@ export default new class {
         return this._performApiCall('post', '/admin/promote', {key}, true, 204)
     }
 
-    adminGetAllPonies() {
-        return this._performApiCall('get', '/admin/ponies', null, true, 200)
-    }
-
     adminGetAllPlayers() {
-        return this._performApiCall('get', '/admin/players', null, true, 200)
+        return this._performApiCall('get', '/players', null, true, 200)
     }
 
     adminGetAllTimeframes() {
-        return this._performApiCall('get', '/admin/timeframes', null, true, 200)
+        return this._performApiCall('get', '/timeframes', null, true, 200)
+    }
+
+    adminGetAllPonies() {
+        return this._performApiCall('get', '/ponies', null, true, 200)
     }
 
 

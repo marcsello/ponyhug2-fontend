@@ -8,7 +8,8 @@ export default new Vuex.Store({
         playerdata: {
             name: null,
             is_admin: null,
-            registered: false
+            registered: false,
+            faction: null // This will be a numeric id... TODO: change to faction data maybe
         },
         timeframe: {
             begin_timestamp: null,
@@ -16,7 +17,8 @@ export default new Vuex.Store({
             fetched: false
         },
         total_ponies: null,
-        leader_score: null
+        leader_score: null,
+        factions_stats: {}
     },
 
     mutations: {
@@ -24,7 +26,8 @@ export default new Vuex.Store({
             state.playerdata = {
                 name: playerdata.name,
                 is_admin: playerdata.is_admin,
-                registered: true
+                registered: true,
+                faction: playerdata.faction
             }
         },
         storeTimeframe(state, timeframe) {
@@ -39,6 +42,9 @@ export default new Vuex.Store({
         },
         storeLeaderScore(state, leader_score) {
             state.leader_score = leader_score
+        },
+        storeFactionsStats(state, factions_stats) {
+            state.factions_stats = factions_stats
         }
     },
 
@@ -57,6 +63,9 @@ export default new Vuex.Store({
         },
         storeLeaderScore({commit}, leader_score) {
             commit('storeLeaderScore', leader_score)
+        },
+        storeFactionsStats({commit}, factions_stats) {
+            commit('storeFactionsStats', factions_stats)
         }
     },
 

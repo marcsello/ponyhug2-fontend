@@ -65,7 +65,7 @@ export default {
   },
   mounted() {
     if (this.$route.params.id) {
-      this.$api.getHuggedPony(this.$route.params.id).then((ponydata) => {
+      this.$api.getPony(this.$route.params.id).then((ponydata) => {
         this.ponydata = ponydata
         this.ponyLoading = false
         this.ponyValid = true

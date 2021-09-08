@@ -2,7 +2,7 @@ export const initialInfoFetchMixin = {
     methods: {
         fetchPrivateInfo() { // Fetch info that does require login (Excluding player info)
             // Get total ponies
-            this.$api.getGameStat().then(({total_ponies}) => {
+            this.$api.getTotalPonyCount().then(({total_ponies}) => {
                 this.$store.dispatch('storeTotalPonies', total_ponies)
             }).catch(({text}) => {
                 this.$showToast(text) // API call failed
