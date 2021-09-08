@@ -129,6 +129,21 @@ export default new class {
         })
     }
 
+    getFactionData(id) {
+        return this._performApiCall('get', '/factions/' + id, null, true, 200, {
+            404: "Ilyen csapat nincs",
+            ...COMMON_ERROR_CODES
+        })
+    }
+
+    getMyFactionData() {
+        return this._performApiCall('get', '/factions/my', null, true, 200)
+    }
+
+    getAllFactionData() {
+        return this._performApiCall('get', '/factions', null, true, 200)
+    }
+
     getLeaderStat() {
         return this._performApiCall('get', '/stats/leader', null, true, 200)
     }
