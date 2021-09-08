@@ -16,9 +16,11 @@ export default new Vuex.Store({
             end_timestamp: null,
             fetched: false
         },
+        factions: {
+
+        },
         total_ponies: null,
         leader_score: null,
-        factions_stats: {}
     },
 
     mutations: {
@@ -40,11 +42,21 @@ export default new Vuex.Store({
         storeTotalPonies(state, total_ponies) {
             state.total_ponies = total_ponies
         },
+        storeFactions(state, factions) {
+
+            factions.forEach((faction) => {
+                state.factions[faction.id] = faction
+            })
+
+            state.factions = factions
+        },
         storeLeaderScore(state, leader_score) {
             state.leader_score = leader_score
         },
         storeFactionsStats(state, factions_stats) {
-            state.factions_stats = factions_stats
+            for (const [key, value] of Object.entries(factions_stats)) {
+                state.factions[key].hugs = value
+            }
         }
     },
 
@@ -60,6 +72,9 @@ export default new Vuex.Store({
         },
         storeTotalPonies({commit}, total_ponies) {
             commit('storeTotalPonies', total_ponies)
+        },
+        storeFactions({commit}, factions) {
+            commit('storeFactions', factions)
         },
         storeLeaderScore({commit}, leader_score) {
             commit('storeLeaderScore', leader_score)
@@ -84,6 +99,15 @@ export default new Vuex.Store({
             } else {
                 return false
             }
+        },
+        myFactionData(state) {
+
+            if (!state.factions || !state.playerdata.registered) {
+                return null
+            }
+
+            return state.factions[state.playerdata.faction]
+
         }
     }
 })
