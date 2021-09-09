@@ -49,7 +49,7 @@
   <div v-else-if="ponyValid === false">
     <b-alert variant="primary" show>Úgy tűnik, ez nem a te ölelésed! De ne csüggedj, rád is sok ölelés vár!</b-alert>
   </div>
-  <div v-else-if="ponyLoading" class="text-center">
+  <div v-else-if="ponyLoading" class="text-center mt-5">
     <b-spinner label="Loading..."></b-spinner>
   </div>
 </template>
