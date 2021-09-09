@@ -2,31 +2,43 @@
   <div v-if="ponyValid === true">
     <b-row class="my-2">
       <b-col>
-        <b-card :title="ponydata.name" class="text-center">
-          <b-img :src="ponydata.image" fluid-grow/>
+        <b-card :title="hugdata.pony.name" class="text-center">
+          <b-img :src="hugdata.pony.image" fluid-grow/>
           <p class="py-3">
-            {{ ponydata.story }}
+            {{ hugdata.pony.story }}
           </p>
         </b-card>
       </b-col>
     </b-row>
     <b-row class="my-2">
       <b-col>
-        <h2>Póni statisztikák</h2>
-        <table class="table table-borderless table-striped table-light">
+        <h2>Statisztikák</h2>
+        <table class="table  table-striped table-light">
+          <tbody>
+          <tr>
+            <th scope="row" class="align-middle">Ekkor ölelted</th>
+            <td>{{ hugdata.timestamp|formathugtimestamp }}</td>
+          </tr>
+          <tr v-if="hugdata.count > 1">
+            <th scope="row" class="align-middle">Ennyiszer próbáltad</th>
+            <td>{{ hugdata.count }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <table class="table  table-striped table-light">
           <tbody>
           <tr>
             <th scope="row" class="align-middle">Először ölelte</th>
-            <td>{{ ponydata.first_hug.playername }}</td>
+            <td>{{ hugdata.pony.first_hug.playername }}</td>
           </tr>
           <tr>
             <th scope="row" class="align-middle">Összesen megölelték</th>
-            <td>{{ ponydata.hugs.length }}</td>
+            <td>{{ hugdata.pony.hugs.length }}</td>
           </tr>
           <tr>
-            <th scope="row" class="align-middle">Eddig megölelték</th>
+            <th scope="row" class="align-middle">Eddig megölelte</th>
             <td>
-              <div v-for="(hugger, index) in ponydata.hugs" :key="index">{{ hugger }}</div>
+              <div v-for="(hugger, index) in hugdata.pony.hugs" :key="index">{{ hugger }}</div>
             </td>
           </tr>
           </tbody>
@@ -35,7 +47,7 @@
     </b-row>
   </div>
   <div v-else-if="ponyValid === false">
-    <b-alert variant="primary" show>Úgy tűnik, ezt a pónit nem ölelted még meg. Keresd meg, és adj neki egy ölelést!</b-alert>
+    <b-alert variant="primary" show>Úgy tűnik, ez nem a te ölelésed! De ne csüggedj, rád is sok ölelés vár!</b-alert>
   </div>
   <div v-else-if="ponyLoading" class="text-center">
     <b-spinner label="Loading..."></b-spinner>
@@ -43,21 +55,29 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: "Pony",
   data() {
     return {
-      ponydata: {
-        "first_hug": {
-          "playername": null,
-          "timestamp": null
+      hugdata: {
+        id: null,
+        count: null,
+        timestamp: null,
+        pony: {
+          first_hug: {
+            playername: null,
+            timestamp: null
+          },
+          hugs: [],
+          id: null,
+          image: null,
+          name: null,
+          source: null,
+          story: null
         },
-        "hugs": [],
-        "id": null,
-        "image": null,
-        "name": null,
-        "source": null,
-        "story": null
+        player: null
       },
       ponyLoading: true,
       ponyValid: null
@@ -65,8 +85,8 @@ export default {
   },
   mounted() {
     if (this.$route.params.id) {
-      this.$api.getPony(this.$route.params.id).then((ponydata) => {
-        this.ponydata = ponydata
+      this.$api.getHug(this.$route.params.id).then((hugdata) => {
+        this.hugdata = hugdata
         this.ponyLoading = false
         this.ponyValid = true
       }).catch(({status, text}) => {
@@ -79,6 +99,11 @@ export default {
         }
 
       })
+    }
+  },
+  filters: {
+    formathugtimestamp(value) {
+      return moment(String(value)).format('hh:mm:ss')
     }
   }
 }
