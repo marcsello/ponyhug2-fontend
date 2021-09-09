@@ -20,17 +20,36 @@
           <b-progress-bar :value="secondsLeft" :label="timeLeftLabel" variant="danger"/>
         </b-progress>
       </p>
+      <p>
+        Csapatok ölelései
+        <b-progress :max="$store.getters.sumHugs">
+          <b-progress-bar
+              v-for="faction in $store.state.factions"
+              :key="faction.id"
+              :value="$store.state.faction_stats[faction.id] || 0"
+              :label="$store.state.faction_stats[faction.id] + ''"
+              :variant="faction.variant"
+              />
+        </b-progress>
+      </p>
     </b-card>
   </div>
 </template>
 
 <script>
+
+import {factionsStatsUpdaterMixin} from "@/mixins";
+
 export default {
   name: "HomeStats",
+  mixins: [
+    factionsStatsUpdaterMixin
+  ],
   data() {
     return {
       localScore: 0,
-      timer: null,
+      remainingTimeUpdateTimer: null,
+      factionsStatsUpdateTimer: null,
       secondsLeft: 0
     }
   },
@@ -45,6 +64,11 @@ export default {
         this.secondsLeft = 0
       }
 
+    }
+  },
+  watch: {
+    '$store.state.timeframe': function() {
+      this.updateCountdown()
     }
   },
   computed: {
@@ -71,18 +95,31 @@ export default {
     }
   },
   mounted() {
-    this.$api.getHugs().then((hugs) => {
-      this.localScore = hugs.length
+    this.$api.getHugCount().then(({hug_counter}) => {
+      this.localScore = hug_counter
     })
 
-    this.timer = setInterval(function () {
-      this.updateCountdown()
-    }.bind(this), 1000)
+    // Countdown csík
 
-    this.updateCountdown()
+    this.remainingTimeUpdateTimer = setInterval(() => {
+      this.updateCountdown()
+    }, 1000)
+
+    // Faction stats
+
+    this.factionsStatsUpdateTimer = setInterval(() => {
+      this.updateFactionsStats()
+    }, 15000)
+
+    this.$nextTick(() => {
+      this.updateCountdown()
+      this.updateFactionsStats()
+    })
+
   },
   beforeDestroy() {
-    clearInterval(this.timer)
+    clearInterval(this.remainingTimeUpdateTimer)
+    clearInterval(this.factionsStatsUpdateTimer)
   }
 }
 </script>

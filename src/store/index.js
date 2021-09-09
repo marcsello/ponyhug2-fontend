@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,8 @@ export default new Vuex.Store({
             fetched: false
         },
         factions: {
+        },
+        faction_stats: { // Édes kurva faszom: https://forum.vuejs.org/t/vuex-best-practices-for-complex-objects/10143/2
 
         },
         total_ponies: null,
@@ -25,19 +28,19 @@ export default new Vuex.Store({
 
     mutations: {
         storePlayerData(state, playerdata) {
-            state.playerdata = {
+            Vue.set(state, 'playerdata', {
                 name: playerdata.name,
                 is_admin: playerdata.is_admin,
                 registered: true,
                 faction: playerdata.faction
-            }
+            })
         },
         storeTimeframe(state, timeframe) {
-            state.timeframe = {
+            Vue.set(state, 'timeframe', {
                 begin_timestamp: new Date(timeframe.begin_timestamp),
                 end_timestamp: new Date(timeframe.end_timestamp),
                 fetched: true
-            }
+            })
         },
         storeTotalPonies(state, total_ponies) {
             state.total_ponies = total_ponies
@@ -45,17 +48,16 @@ export default new Vuex.Store({
         storeFactions(state, factions) {
 
             factions.forEach((faction) => {
-                state.factions[faction.id] = faction
+                Vue.set(state.factions, faction.id, faction)
             })
 
-            state.factions = factions
         },
         storeLeaderScore(state, leader_score) {
             state.leader_score = leader_score
         },
         storeFactionsStats(state, factions_stats) {
             for (const [key, value] of Object.entries(factions_stats)) {
-                state.factions[key].hugs = value
+                Vue.set(state.faction_stats, key, value)
             }
         }
     },
@@ -102,11 +104,20 @@ export default new Vuex.Store({
         },
         myFactionData(state) {
 
-            if (!state.factions || !state.playerdata.registered) {
+            if (!state.factions || _.isEmpty(state.factions) || !state.playerdata.registered) {
                 return null
             }
 
             return state.factions[state.playerdata.faction]
+
+        },
+        sumHugs(state) { // this can be retrived from summarizing the hugs
+
+            if (!state.factions || _.isEmpty(state.factions) || _.isEmpty(state.faction_stats) || !state.playerdata.registered) {
+                return 0
+            }
+
+            return Object.values(state.faction_stats).reduce((a, b) => a + b)
 
         }
     }

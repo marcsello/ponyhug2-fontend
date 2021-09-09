@@ -164,6 +164,10 @@ export default new class {
         return this._performApiCall('get', '/hugs', null, true, 200)
     }
 
+    getHugCount() {
+        return this._performApiCall('get', '/hugs/count', null, true, 200)
+    }
+
     getHug(id) {
         return this._performApiCall('get', '/hugs/' + id, null, true, 200)
     }

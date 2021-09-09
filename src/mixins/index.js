@@ -59,3 +59,15 @@ export const leaderScoreUpdaterMixin = {
         }
     }
 }
+
+export const factionsStatsUpdaterMixin = {
+    methods: {
+        updateFactionsStats() {
+            this.$api.getFactionsStat().then((data) => {
+                this.$store.dispatch('storeFactionsStats', data)
+            }).catch(() => {
+                // Errors are ignored
+            })
+        }
+    }
+}
