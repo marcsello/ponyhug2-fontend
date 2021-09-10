@@ -1,8 +1,15 @@
 <template>
-  <b-jumbotron header="Istálló" lead="Eddig megölelt pónik:" class="text-center">
-    <p class="herd-counter">{{ herdCounterText }}</p>
-    <b-progress :value="hugCount" :max="$store.state.total_ponies" animated></b-progress>
-  </b-jumbotron>
+  <b-overlay :show="stillLoading" rounded="sm">
+    <b-jumbotron header="Istálló" lead="Eddig megölelt pónik:" class="text-center">
+      <p class="herd-counter">{{ herdCounterText }}</p>
+      <b-progress
+          v-if="!stillLoading"
+          :value="hugCount"
+          :max="$store.state.total_ponies"
+          animated
+          :variant="this.$store.getters.myFactionData.variant"/>
+    </b-jumbotron>
+  </b-overlay>
 </template>
 
 <script>
@@ -13,8 +20,11 @@ export default {
     hugsLoading: Boolean
   },
   computed: {
+    stillLoading() { // This is probably the worst way of doing this...
+      return this.hugsLoading || (this.$store.state.total_ponies == null) || (this.$store.getters.myFactionData == null)
+    },
     herdCounterText() {
-      if (this.hugsLoading) {
+      if (this.stillLoading) {
         return '...'
       } else {
         return this.hugCount + '/' + this.$store.state.total_ponies
