@@ -1,64 +1,75 @@
 <template>
-  <div v-if="ponyValid === true">
-    <b-row class="my-2">
+  <div>
+    <div v-if="ponyValid === true">
+      <b-row class="my-2">
+        <b-col>
+          <b-card :title="hugdata.pony.name" class="text-center">
+            <b-img :src="hugdata.pony.image+'?size=lg'" fluid-grow/>
+            <p class="py-3">
+              {{ hugdata.pony.story }}
+            </p>
+          </b-card>
+        </b-col>
+      </b-row>
+      <b-row class="my-2">
+        <b-col>
+          <h2>Statisztikák</h2>
+          <table class="table  table-striped table-light">
+            <tbody>
+            <tr>
+              <th scope="row" class="align-middle">Ekkor ölelted</th>
+              <td>{{ hugdata.timestamp|formathugtimestamp }}</td>
+            </tr>
+            <tr v-if="hugdata.count > 1">
+              <th scope="row" class="align-middle">Ennyiszer próbáltad</th>
+              <td>{{ hugdata.count }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table  table-striped table-light">
+            <tbody>
+            <tr>
+              <th scope="row" class="align-middle">Először ölelte</th>
+              <td>{{ hugdata.pony.first_hug.playername }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="align-middle">Összesen megölelték</th>
+              <td>{{ hugdata.pony.hugs.length }}</td>
+            </tr>
+            <tr>
+              <th scope="row" class="align-middle">Eddig megölelte</th>
+              <td>
+                <div v-for="(hugger, index) in hugdata.pony.hugs" :key="index">{{ hugger }}</div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </b-col>
+      </b-row>
+    </div>
+    <div v-else-if="ponyValid === false">
+      <b-alert variant="primary" show>Úgy tűnik, ez nem a te ölelésed! De ne csüggedj, rád is sok ölelés vár!</b-alert>
+    </div>
+    <div v-else-if="ponyLoading" class="text-center mt-5">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
+    <b-row class="mt-1">
       <b-col>
-        <b-card :title="hugdata.pony.name" class="text-center">
-          <b-img :src="hugdata.pony.image+'?size=lg'" fluid-grow/>
-          <p class="py-3">
-            {{ hugdata.pony.story }}
-          </p>
-        </b-card>
+        <nav-button-group/>
       </b-col>
     </b-row>
-    <b-row class="my-2">
-      <b-col>
-        <h2>Statisztikák</h2>
-        <table class="table  table-striped table-light">
-          <tbody>
-          <tr>
-            <th scope="row" class="align-middle">Ekkor ölelted</th>
-            <td>{{ hugdata.timestamp|formathugtimestamp }}</td>
-          </tr>
-          <tr v-if="hugdata.count > 1">
-            <th scope="row" class="align-middle">Ennyiszer próbáltad</th>
-            <td>{{ hugdata.count }}</td>
-          </tr>
-          </tbody>
-        </table>
-        <table class="table  table-striped table-light">
-          <tbody>
-          <tr>
-            <th scope="row" class="align-middle">Először ölelte</th>
-            <td>{{ hugdata.pony.first_hug.playername }}</td>
-          </tr>
-          <tr>
-            <th scope="row" class="align-middle">Összesen megölelték</th>
-            <td>{{ hugdata.pony.hugs.length }}</td>
-          </tr>
-          <tr>
-            <th scope="row" class="align-middle">Eddig megölelte</th>
-            <td>
-              <div v-for="(hugger, index) in hugdata.pony.hugs" :key="index">{{ hugger }}</div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </b-col>
-    </b-row>
-  </div>
-  <div v-else-if="ponyValid === false">
-    <b-alert variant="primary" show>Úgy tűnik, ez nem a te ölelésed! De ne csüggedj, rád is sok ölelés vár!</b-alert>
-  </div>
-  <div v-else-if="ponyLoading" class="text-center mt-5">
-    <b-spinner label="Loading..."></b-spinner>
   </div>
 </template>
 
 <script>
 import moment from 'moment';
+import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
   name: "Pony",
+  components: {
+    NavButtonGroup
+  },
   data() {
     return {
       hugdata: {

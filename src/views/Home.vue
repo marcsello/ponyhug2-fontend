@@ -52,8 +52,7 @@
         <p>Most, hogy mindent tudsz amit tudni lehet, menj és ölelj meg pár pónit.</p>
         <p>Jó szórakozást kívánunk és érezd jól magad a pikniken.</p>
         <p class="blockquote-footer">A fejlesztő csapat</p>
-        <b-button block variant="primary" to="/hug">Ölelj meg egy pónit!</b-button>
-        <b-button block variant="primary" to="/herd">Istálló</b-button>
+        <nav-button-group variant="primary"/>
       </b-col>
     </b-row>
   </div>
@@ -63,10 +62,11 @@
 <script>
 
 import HomeStats from "@/components/HomeStats";
+import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
   name: 'Home',
-  components: {HomeStats}
+  components: {HomeStats,NavButtonGroup}
 }
 </script>
 

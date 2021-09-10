@@ -6,18 +6,25 @@
       </b-col>
     </b-row>
     <herd-grid :hugs="hugs" v-if="!hugsAndTotalPoniesLoading"/>
+    <b-row class="mt-5">
+      <b-col>
+        <nav-button-group/>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import HerdStats from "@/components/HerdStats";
 import HerdGrid from "@/components/HerdGrid";
+import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
   name: "Herd",
   components: {
     HerdStats,
-    HerdGrid
+    HerdGrid,
+    NavButtonGroup
   },
   data() {
     return {
