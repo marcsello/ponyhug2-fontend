@@ -15,7 +15,7 @@ export default new class {
     _setupHTTPObject() {
         let token = localStorage.getItem(LOCAL_STORAGE_KEY)
 
-        if (isJwtExpired(token)) { // This is my finest creation
+        if (token && isJwtExpired(token)) { // This is my finest creation
             localStorage.removeItem(LOCAL_STORAGE_KEY)
             token = null
         }
