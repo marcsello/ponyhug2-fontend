@@ -26,6 +26,7 @@ export default new Vuex.Store({
         faction_stats_fetched: false,
         total_ponies: null,
         leader_score: null,
+        just_scanned_code: null // This is used to prevent back-button spam (we store the last code used, and ignore it only if it's in the hash... a new scan will reload the app anyways)
     },
 
     mutations: {
@@ -63,6 +64,9 @@ export default new Vuex.Store({
                 Vue.set(state.faction_stats, key, value)
             }
             state.faction_stats_fetched = true;
+        },
+        storeJustScannedCode(state, just_scanned_code) {
+            state.just_scanned_code = just_scanned_code
         }
     },
 
@@ -87,6 +91,9 @@ export default new Vuex.Store({
         },
         storeFactionsStats({commit}, factions_stats) {
             commit('storeFactionsStats', factions_stats)
+        },
+        storeJustScannedCode({commit}, just_scanned_code) {
+            commit('storeJustScannedCode', just_scanned_code)
         }
     },
 
