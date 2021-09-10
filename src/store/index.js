@@ -19,9 +19,11 @@ export default new Vuex.Store({
         },
         factions: {
         },
+        factions_fetched: false,
         faction_stats: { // Édes kurva faszom: https://forum.vuejs.org/t/vuex-best-practices-for-complex-objects/10143/2
 
         },
+        faction_stats_fetched: false,
         total_ponies: null,
         leader_score: null,
     },
@@ -50,6 +52,7 @@ export default new Vuex.Store({
             factions.forEach((faction) => {
                 Vue.set(state.factions, faction.id, faction)
             })
+            state.factions_fetched = true;
 
         },
         storeLeaderScore(state, leader_score) {
@@ -59,6 +62,7 @@ export default new Vuex.Store({
             for (const [key, value] of Object.entries(factions_stats)) {
                 Vue.set(state.faction_stats, key, value)
             }
+            state.faction_stats_fetched = true;
         }
     },
 
