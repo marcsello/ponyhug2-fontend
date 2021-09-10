@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {isJwtExpired} from "jwt-check-expiration";
 
 const API_BASE_URL = process.env.VUE_APP_API_LOCATION
 const LOCAL_STORAGE_KEY = "JWT"
@@ -12,7 +13,12 @@ const COMMON_ERROR_CODES = {
 export default new class {
 
     _setupHTTPObject() {
-        const token = localStorage.getItem(LOCAL_STORAGE_KEY)
+        let token = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+        if (isJwtExpired(token)) { // This is my finest creation
+            localStorage.removeItem(LOCAL_STORAGE_KEY)
+            token = null
+        }
 
         let headers = {}
         if (token) {
