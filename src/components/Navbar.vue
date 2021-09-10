@@ -5,7 +5,7 @@
 
       <b-navbar-brand>
         <b>PonyHug</b>
-        <b-badge>2020</b-badge>
+        <b-badge>2021</b-badge>
       </b-navbar-brand>
 
 

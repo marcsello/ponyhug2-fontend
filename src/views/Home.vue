@@ -19,22 +19,27 @@
     <b-row>
       <b-col class="my-3">
         <h2>Kedves Játékos!</h2>
-        <p>Köszöntelek a 2020-as Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
+        <p>Köszöntelek a 2021-es Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
           pedig engedd meg, hogy köszönetet mondjak amiért részt veszel a játékunkban. Sokat dolgoztunk vele és
           reméljük, hogy jól fogsz szórakozni.</p>
         <b-img src="@/assets/derpyflag.png" fluid-grow class="my-3"/>
         <h3>Na de hogyan is kell ezt játszani?</h3>
-        <p>Ha részt vettél a 2019-es Brony Pikniken már ismerős lehet a koncepció.</p>
-        <p>A Margit szigeten a Piknik helyszínének közelében elrejtettünk számos kártyát rajtuk egy QR kóddal.</p>
-        <p>Az alábbi térkép mutatja hogy mekkora területet érdemes átvizsgálni. Nincs semmi trükk, a határokon kívül tényleg nem rejtettünk el semmit.</p>
+        <p>Ha részt vettél a 2019-es vagy 2020-as Brony Pikniken már ismerős lehet a koncepció.</p>
+        <p>A Margit szigeten a Piknik helyszínének közelében elrejtettünk számos kártyát rajtuk QR kóddal.</p>
+        <p>Az alábbi térkép mutatja hogy mekkora területet érdemes átvizsgálni. Nincs semmi trükk, a határokon kívül
+          tényleg nem rejtettünk el semmit.</p>
         <b-aspect aspect="2:3" class="my-2">
-          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1-jjj1c22H3qa3Y7a1XLfTCfjIcQBO0YD">
+          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1G90E6YiIy2y-ngJXtcSq2BeD4CuWduQu">
           </iframe>
         </b-aspect>
         <p>A feladatod az lesz, hogy ezeket a kártyákat megtaláld és a telefonod segítségével a rajtuk lévő kódokat
           beolvasd.</p>
-        <b-img src="@/assets/qrsample.png" fluid-grow/>
-        <p>Ekkor a telefonod egy pónit fog neked megjeleníteni aki nagyon boldog, hogy egy ölelést oszthat meg veled.
+        <p>Az egyik ilyen kódot ebbe a szövegbe rejtettük, mert úgy se olvassa el senki. Konkrétan az alábbi az, <b>próbáld
+          csak ki!</b></p>
+        <b-img src="@/assets/legitqr.png" fluid-grow class="mb-1"/>
+        <p>(Igazából egyszerűbb, ha keresel valakit, hogy a telefonjáról beolvashasd)</p>
+        <p>Beolvasás után a telefonod egy pónit fog neked megjeleníteni aki nagyon boldog, hogy egy ölelést oszthat meg
+          veled.
           (Vagy nem. Lehet, hogy rossz napja volt)</p>
         <p>Feltűnhet a fenti sötét sávban egy kis trófea ikon mellette egy számmal. Ez a versenyben vezető játékos által
           megölelt pónik számát mutatja.</p>
@@ -42,9 +47,12 @@
         <p>Bizony!</p>
         <p>A játék egy verseny amit a legtöbb pónit megölelő játékos nyer a legrövidebb időn belül. A helyezetteket a
           játékidő lejárta után fogjuk kihirdetni!</p>
-        <p>A játék 2020. Szeptember 12-én 10:00 órától 17:00 óráig tart.</p>
+        <p>A játék 2021. szeptember 11-én 11:15 órától 17:00 óráig tart.</p>
         <p>Tartsd nyitva a szemed hogy te öleld meg a legtöbb pónit mert értékes nyeremények várnak! Ennek ellenére
           nyugodtan menj keresgélni a barátaiddal. Egyedül nyerni magányos dolog.</p>
+        <p>Idén, hogy felrázzuk kicsit a játékot, bevezettünk két csapatot. Az öleléseitek a csapatotok eredményéhez ad
+          hozzá, de innentől rátok bízzuk, hogy ennek milyen jelentősséget tulajdonítotok. A te csapatod neve
+          {{ $store.state.factions_fetched ? $store.getters.myFactionData.name : '...' }}.</p>
         <h3>Mire van szükséged?</h3>
         <p>Egy akármilyen okostelefonra, azon egy böngészőre és bármilyen QR kód olvasóra ami képes linkeket
           megnyitni.</p>

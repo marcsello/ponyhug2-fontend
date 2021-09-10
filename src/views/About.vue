@@ -10,12 +10,15 @@
       <b-col>
         <h2>PonyHug Csapat</h2>
         <b-card title="Marcsello" img-src="@/assets/marcsello.png" img-left class="my-2">
-          <span class="text-muted">Project Leader, Frontend</span>
+          <span class="text-muted">Project Leader, Backend, Frontend</span>
         </b-card>
         <b-card title="Bencee" img-src="@/assets/bencee.png" img-right class="my-2">
           <span class="text-muted">Content, Design</span>
         </b-card>
-        <b-card title="Tormakris" img-src="@/assets/tormakris.png" img-left class="my-2">
+        <b-card title="Shiron" img-src="@/assets/shiron.png" img-left class="my-2">
+          <span class="text-muted">Testing, testing, testing...</span>
+        </b-card>
+        <b-card title="Tormakris" img-src="@/assets/tormakris.png" img-right class="my-2">
           <span class="text-muted">DevOps, Backend</span>
         </b-card>
       </b-col>
@@ -31,10 +34,6 @@
           <div class="my-2">
             <h4>Matthyly</h4>
             <p>Piknik nélkül mihez kezdenénk?</p>
-          </div>
-          <div class="my-2">
-            <h4>Shiron</h4>
-            <p>A túlórázó tesztelő</p>
           </div>
           <div class="my-2">
             <h4>Amcsi</h4>
