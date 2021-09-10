@@ -9,16 +9,18 @@
           </b-progress>
         </p>
         <p>
-          A vezető ölelései
-          <b-progress :max="$store.state.total_ponies">
-            <b-progress-bar :value="$store.state.leader_score" :label="leaderScoreLabel" variant="warning"
-                            class="text-dark"/>
-          </b-progress>
-        </p>
-        <p>
           Hátralévő idő
           <b-progress :max="totalSeconds">
             <b-progress-bar :value="secondsLeft" :label="timeLeftLabel" variant="danger"/>
+          </b-progress>
+        </p>
+        <p>
+          A vezető ölelései
+          <b-progress :max="$store.state.total_ponies">
+            <b-progress-bar
+                :value="$store.state.leader_score"
+                :label="leaderScoreLabel" variant="secondary"
+                            />
           </b-progress>
         </p>
         <p>
