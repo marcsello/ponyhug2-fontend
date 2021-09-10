@@ -91,7 +91,7 @@ export default {
 
         this.submitPending = true
 
-        this.$api.performHug(this.form.key).then((hug) => {
+        this.$api.performHug(this.form.key.toUpperCase()).then((hug) => {
           this.updateLeaderScore() // In case we were the leader
           this.$showToast("Új pónit öleltél meg!", "success", false)
           this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
