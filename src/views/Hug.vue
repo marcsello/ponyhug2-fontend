@@ -94,12 +94,16 @@ export default {
         this.$api.performHug(this.form.key.toUpperCase()).then((hug) => {
           this.updateLeaderScore() // In case we were the leader
           this.$showToast("Új pónit öleltél meg!", "success", false)
-          this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
+          this.$router.push({name: 'Pony', params: {id: hug.id}})
 
-        }).catch(({status, text}) => {
+        }).catch(({status, text, data}) => {
           this.submitPending = false
 
           switch (status) {
+            case 200: // this is not an error actually
+              this.$showToast("Ezt a pónit megölelted már!", "user_error", false)
+              this.$router.push({name: 'Pony', params: {id: data.id}})
+              break;
             case 409:
               this.$showToast(text, 'user_error')
               break;
