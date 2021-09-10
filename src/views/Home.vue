@@ -12,6 +12,11 @@
       </b-col>
     </b-row>
     <b-row>
+      <b-col class="my-2">
+        <home-faction-indicator/>
+      </b-col>
+    </b-row>
+    <b-row>
       <b-col class="my-3">
         <h2>Kedves Játékos!</h2>
         <p>Köszöntelek a 2020-as Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
@@ -62,11 +67,16 @@
 <script>
 
 import HomeStats from "@/components/HomeStats";
+import HomeFactionIndicator from "@/components/HomeFactionIndicator";
 import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
   name: 'Home',
-  components: {HomeStats,NavButtonGroup}
+  components: {
+    HomeStats,
+    HomeFactionIndicator,
+    NavButtonGroup
+  }
 }
 </script>
 
