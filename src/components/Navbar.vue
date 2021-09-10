@@ -10,6 +10,7 @@
 
 
       <leader-score v-if="$store.state.playerdata.registered" /> <!-- this v-if delays the create and mount calls of the component -->
+      <faction-indicator v-if="$store.state.playerdata.registered"  class="m-0 p-0"/>
 
       <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
 
@@ -37,10 +38,11 @@
 <script>
 
 import LeaderScore from "@/components/LeaderScore";
+import FactionIndicator from "@/components/FactionIndicator";
 
 export default {
   name: "Navbar",
-  components: {LeaderScore},
+  components: {LeaderScore, FactionIndicator},
   methods: {},
   computed: {}
 }
