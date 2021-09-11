@@ -100,6 +100,9 @@ export default {
           key: 'hug_counter',
           label: 'Hugs',
           sortable: true,
+        },
+        {
+          key: "faction"
         }
       ]
     }
