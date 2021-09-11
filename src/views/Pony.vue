@@ -4,7 +4,7 @@
       <b-row class="my-2">
         <b-col>
           <b-card :title="hugdata.pony.name" class="text-center">
-            <b-img :src="hugdata.pony.image+'?size=lg'" fluid-grow/>
+            <b-img :src="hugdata.pony.image" fluid-grow/>
             <p class="py-3">
               {{ hugdata.pony.story }}
             </p>
