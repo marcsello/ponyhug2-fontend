@@ -1,37 +1,61 @@
 <template>
   <div>
-    <b-card title="A játék állása">
-      <p>
-        Megölelt pónik
-        <b-progress :max="$store.state.total_ponies">
-          <b-progress-bar :value="localScore" :label="localScoreLabel"/>
-        </b-progress>
-      </p>
-      <p>
-        A vezető ölelései
-        <b-progress :max="$store.state.total_ponies">
-          <b-progress-bar :value="$store.state.leader_score" :label="leaderScoreLabel" variant="warning"
-                          class="text-dark"/>
-        </b-progress>
-      </p>
-      <p>
-        Hátralévő idő
-        <b-progress :max="totalSeconds">
-          <b-progress-bar :value="secondsLeft" :label="timeLeftLabel" variant="danger"/>
-        </b-progress>
-      </p>
-    </b-card>
+    <b-overlay rounded="sm" :show="stillLoading">
+      <b-card title="A játék állása">
+        <p>
+          Megölelt pónik
+          <b-progress :max="$store.state.total_ponies">
+            <b-progress-bar :value="localScore" :label="localScoreLabel"/>
+          </b-progress>
+        </p>
+        <p>
+          Hátralévő idő
+          <b-progress :max="totalSeconds">
+            <b-progress-bar :value="secondsLeft" :label="timeLeftLabel" variant="danger"/>
+          </b-progress>
+        </p>
+        <p>
+          A vezető ölelései
+          <b-progress :max="$store.state.total_ponies">
+            <b-progress-bar
+                :value="$store.state.leader_score"
+                :label="leaderScoreLabel" variant="secondary"
+                            />
+          </b-progress>
+        </p>
+        <p>
+          Csapatok ölelései
+          <b-progress :max="$store.getters.sumHugs">
+            <b-progress-bar
+                v-for="faction in $store.state.factions"
+                :key="faction.id"
+                :value="$store.state.faction_stats[faction.id] || 0"
+                :label="$store.state.faction_stats[faction.id] + ''"
+                :variant="faction.variant"
+            />
+          </b-progress>
+        </p>
+      </b-card>
+    </b-overlay>
   </div>
 </template>
 
 <script>
+
+import {factionsStatsUpdaterMixin} from "@/mixins";
+
 export default {
   name: "HomeStats",
+  mixins: [
+    factionsStatsUpdaterMixin
+  ],
   data() {
     return {
       localScore: 0,
-      timer: null,
-      secondsLeft: 0
+      remainingTimeUpdateTimer: null,
+      factionsStatsUpdateTimer: null,
+      secondsLeft: 0,
+      hugsLoading: false
     }
   },
   methods: {
@@ -45,6 +69,11 @@ export default {
         this.secondsLeft = 0
       }
 
+    }
+  },
+  watch: {
+    '$store.state.timeframe': function () {
+      this.updateCountdown()
     }
   },
   computed: {
@@ -68,21 +97,44 @@ export default {
           (seconds_left < 10 ? '0' + seconds_left : seconds_left)
 
       // I hate javascript
+    },
+    stillLoading() {
+      return this.$store.state.leader_score == null ||
+          this.$store.state.total_ponies == null ||
+          !this.$store.state.timeframe.fetched ||
+          this.hugsLoading ||
+          !this.$store.state.faction_stats_fetched ||
+          !this.$store.state.factions_fetched
     }
   },
   mounted() {
-    this.$api.getHugs().then((hugs) => {
-      this.localScore = hugs.length
+    this.hugsLoading = true
+    this.$api.getHugCount().then(({hug_counter}) => {
+      this.localScore = hug_counter
+      this.hugsLoading = false
     })
 
-    this.timer = setInterval(function () {
-      this.updateCountdown()
-    }.bind(this), 1000)
+    // Countdown csík
 
-    this.updateCountdown()
+    this.remainingTimeUpdateTimer = setInterval(() => {
+      this.updateCountdown()
+    }, 1000)
+
+    // Faction stats
+
+    this.factionsStatsUpdateTimer = setInterval(() => {
+      this.updateFactionsStats()
+    }, 15000)
+
+    this.$nextTick(() => {
+      this.updateCountdown()
+      this.updateFactionsStats()
+    })
+
   },
   beforeDestroy() {
-    clearInterval(this.timer)
+    clearInterval(this.remainingTimeUpdateTimer)
+    clearInterval(this.factionsStatsUpdateTimer)
   }
 }
 </script>

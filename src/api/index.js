@@ -1,6 +1,7 @@
 import axios from 'axios'
+import {isJwtExpired} from "jwt-check-expiration";
 
-const API_BASE_URL = "https://hugs.hunbrony.hu/api/"
+const API_BASE_URL = process.env.VUE_APP_API_LOCATION
 const LOCAL_STORAGE_KEY = "JWT"
 
 const COMMON_ERROR_CODES = {
@@ -12,7 +13,12 @@ const COMMON_ERROR_CODES = {
 export default new class {
 
     _setupHTTPObject() {
-        const token = localStorage.getItem(LOCAL_STORAGE_KEY)
+        let token = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+        if (token && isJwtExpired(token)) { // This is my finest creation
+            localStorage.removeItem(LOCAL_STORAGE_KEY)
+            token = null
+        }
 
         let headers = {}
         if (token) {
@@ -93,11 +99,11 @@ export default new class {
 
     }
 
-    performRegister(playername) {
+    performRegister(name) {
 
         return new Promise((resolve, reject) => {
 
-            this._performApiCall('post', '/players', {playername}, false, 201, {
+            this._performApiCall('post', '/players', {name}, false, 201, {
                 422: "A név mező hiányos!",
                 409: "A név már foglalt!",
                 ...COMMON_ERROR_CODES
@@ -107,7 +113,8 @@ export default new class {
                 this._setupHTTPObject() // Update JWT token memes
                 return resolve({
                     name: data.name,
-                    is_admin: data.is_admin
+                    is_admin: data.is_admin,
+                    faction: data.faction
                     // Do not pass JWT token any further
                 })
 
@@ -128,24 +135,43 @@ export default new class {
         })
     }
 
+    getFactionData(id) {
+        return this._performApiCall('get', '/factions/' + id, null, true, 200, {
+            404: "Ilyen csapat nincs",
+            ...COMMON_ERROR_CODES
+        })
+    }
+
+    getMyFactionData() {
+        return this._performApiCall('get', '/factions/my', null, true, 200)
+    }
+
+    getAllFactionData() {
+        return this._performApiCall('get', '/factions', null, true, 200)
+    }
+
     getLeaderStat() {
         return this._performApiCall('get', '/stats/leader', null, true, 200)
     }
 
-    getGameStat() {
-        return this._performApiCall('get', '/stats/game', null, true, 200)
+    getFactionsStat() {
+        return this._performApiCall('get', '/stats/factions', null, true, 200)
     }
 
-    getHuggedPonies() {
-        return this._performApiCall('get', '/ponies', null, true, 200)
+    getTotalPonyCount() {
+        return this._performApiCall('get', '/ponies/count', null, true, 200)
     }
 
-    getHuggedPony(id) {
+    getPony(id) {
         return this._performApiCall('get', '/ponies/' + id, null, true, 200)
     }
 
     getHugs() {
         return this._performApiCall('get', '/hugs', null, true, 200)
+    }
+
+    getHugCount() {
+        return this._performApiCall('get', '/hugs/count', null, true, 200)
     }
 
     getHug(id) {
@@ -155,7 +181,7 @@ export default new class {
     performHug(key) {
         return this._performApiCall('post', '/hugs', {key}, true, 201, {
             423: "A játék jelenleg inaktív",
-            409: "Ezt a pónit már megölelted",
+            200: "Ezt a pónit már megölelted", // This is not an error actually..
             404: "Érvénytelen kód",
             ...COMMON_ERROR_CODES
         })
@@ -165,16 +191,16 @@ export default new class {
         return this._performApiCall('post', '/admin/promote', {key}, true, 204)
     }
 
-    adminGetAllPonies() {
-        return this._performApiCall('get', '/admin/ponies', null, true, 200)
-    }
-
     adminGetAllPlayers() {
-        return this._performApiCall('get', '/admin/players', null, true, 200)
+        return this._performApiCall('get', '/players', null, true, 200)
     }
 
     adminGetAllTimeframes() {
-        return this._performApiCall('get', '/admin/timeframes', null, true, 200)
+        return this._performApiCall('get', '/timeframes', null, true, 200)
+    }
+
+    adminGetAllPonies() {
+        return this._performApiCall('get', '/ponies', null, true, 200)
     }
 
 

@@ -48,8 +48,14 @@
       </b-row>
       <b-row>
         <b-col>
-          <h1>Ponies</h1>
+          <h1>Timeframes</h1>
           <pre>{{ data.timeframes }}</pre>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <h1>Factions</h1>
+          <pre>{{ data.factions }}</pre>
         </b-col>
       </b-row>
     </div>
@@ -79,6 +85,7 @@ export default {
         ponies: [],
         players: [],
         timeframes: [],
+        factions: []
       },
       leaderboardFields: [
         {
@@ -93,6 +100,9 @@ export default {
           key: 'hug_counter',
           label: 'Hugs',
           sortable: true,
+        },
+        {
+          key: "faction"
         }
       ]
     }
@@ -128,6 +138,12 @@ export default {
         this.data.timeframes = timeframes
       }).catch(({text}) => {
         this.$showToast("Timeframes: " + text)
+      })
+
+      this.$api.getAllFactionData().then((factions) => { // this isn't admin stuff, but meh...
+        this.data.factions = factions
+      }).catch(({text}) => {
+        this.$showToast("Factions: " + text)
       })
 
     },

@@ -30,6 +30,7 @@
                     placeholder="Játékos név"
                     autocomplete="off"
                     :disabled="registerPending"
+                    maxlength="50"
                 ></b-form-input>
               </b-form-group>
 

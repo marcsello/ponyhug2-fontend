@@ -91,15 +91,21 @@ export default {
 
         this.submitPending = true
 
-        this.$api.performHug(this.form.key).then((hug) => {
+        this.$api.performHug(this.form.key.toUpperCase()).then((hug) => {
           this.updateLeaderScore() // In case we were the leader
           this.$showToast("Új pónit öleltél meg!", "success", false)
-          this.$router.push({name: 'Pony', params: {id: hug.pony.id}})
+          this.$store.dispatch('storeJustScannedCode', this.form.key)
+          this.$router.push({name: 'Pony', params: {id: hug.id}})
 
-        }).catch(({status, text}) => {
+        }).catch(({status, text, data}) => {
           this.submitPending = false
 
           switch (status) {
+            case 200: // this is not an error actually
+              this.$showToast("Ezt a pónit megölelted már!", "user_error", false)
+              this.$store.dispatch('storeJustScannedCode', this.form.key)
+              this.$router.push({name: 'Pony', params: {id: data.id}})
+              break;
             case 409:
               this.$showToast(text, 'user_error')
               break;
@@ -125,8 +131,15 @@ export default {
   },
   mounted() {
     if (this.$route.hash) {
-      this.form.key = this.$route.hash.substr(1)
-      this.onSubmit()
+      const scanned_key = this.$route.hash.substr(1)
+
+      // Super gagyi solution, de most nem tudok jobbat... a sima back button spamet megoldja...
+      if (scanned_key === this.$store.state.just_scanned_code) {
+        window.location.hash = ""
+      } else {
+        this.form.key = scanned_key
+        this.onSubmit()
+      }
     }
   }
 }

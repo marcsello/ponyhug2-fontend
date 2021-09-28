@@ -2,14 +2,13 @@
   <div>
     <b-row>
       <b-col>
-        <b-overlay :show="hugsLoading" rounded="sm">
-          <herd-stats :hug-count="hugs.length" :hugs-loading="hugsLoading"/>
-        </b-overlay>
+        <herd-stats :hug-count="hugs.length" :hugs-loading="hugsLoading"/>
       </b-col>
     </b-row>
-    <b-row>
+    <herd-grid :hugs="hugs" v-if="!hugsAndTotalPoniesLoading"/>
+    <b-row class="mt-5">
       <b-col>
-        <herd-list :hugs="hugs" v-if="!hugsLoading"/>
+        <nav-button-group/>
       </b-col>
     </b-row>
   </div>
@@ -17,18 +16,25 @@
 
 <script>
 import HerdStats from "@/components/HerdStats";
-import HerdList from "@/components/HerdList";
+import HerdGrid from "@/components/HerdGrid";
+import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
   name: "Herd",
   components: {
     HerdStats,
-    HerdList
+    HerdGrid,
+    NavButtonGroup
   },
   data() {
     return {
       hugs: [],
       hugsLoading: true
+    }
+  },
+  computed: {
+    hugsAndTotalPoniesLoading() {
+      return this.hugsLoading || (this.$store.state.total_ponies == null);
     }
   },
   mounted() {
