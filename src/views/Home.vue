@@ -36,7 +36,7 @@
           beolvasd.</p>
         <p>Az egyik ilyen kódot ebbe a szövegbe rejtettük, mert úgy se olvassa el senki. Konkrétan az alábbi az, <b>próbáld
           csak ki!</b></p>
-        <b-img src="@/assets/legitqr.png" fluid-grow class="mb-1"/>
+        <b-img src="@/assets/legitqr.jpg" fluid-grow class="mb-1"/>
         <p>(Igazából egyszerűbb, ha keresel valakit, hogy a telefonjáról beolvashasd)</p>
         <p>Beolvasás után a telefonod egy pónit fog neked megjeleníteni aki nagyon boldog, hogy egy ölelést oszthat meg
           veled.

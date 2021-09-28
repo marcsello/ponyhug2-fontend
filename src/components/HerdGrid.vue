@@ -1,7 +1,7 @@
 <template>
   <b-row>
-    <b-col v-for="i in $store.state.total_ponies" :key="i" cols="4">
-      <small-hug-card :hug-data="getHugDataAtOrder(i)" class="w-100 mb-3"/>
+    <b-col v-for="i in $store.state.total_ponies" :key="i" cols="4" class="my-3">
+      <small-hug-card :hug-data="getHugDataAtOrder(i)" class="w-100"/>
     </b-col>
   </b-row>
 </template>
