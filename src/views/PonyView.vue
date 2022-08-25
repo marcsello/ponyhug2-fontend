@@ -66,7 +66,7 @@ import moment from 'moment';
 import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
-  name: "Pony",
+  name: "PonyView",
   components: {
     NavButtonGroup
   },

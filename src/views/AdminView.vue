@@ -75,7 +75,7 @@
 /// Danger Zone ///
 
 export default {
-  name: "Admin",
+  name: "AdminView",
   data() {
     return {
       promoteform: {

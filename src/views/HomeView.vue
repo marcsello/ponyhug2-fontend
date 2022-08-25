@@ -79,7 +79,7 @@ import HomeFactionIndicator from "@/components/HomeFactionIndicator";
 import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
-  name: 'Home',
+  name: 'HomeView',
   components: {
     HomeStats,
     HomeFactionIndicator,

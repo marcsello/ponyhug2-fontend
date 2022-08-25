@@ -3,11 +3,11 @@ import VueRouter from 'vue-router'
 
 import api from '@/api'
 
-import Home from '@/views/Home.vue'
-import Herd from "@/views/Herd";
-import Hug from "@/views/Hug";
-import Pony from "@/views/Pony";
-import Register from "@/views/Register";
+import HomeView from '@/views/HomeView.vue'
+import HerdView from "@/views/HerdView";
+import HugView from "@/views/HugView";
+import PonyView from "@/views/PonyView";
+import RegisterView from "@/views/RegisterView";
 
 Vue.use(VueRouter)
 
@@ -15,22 +15,22 @@ const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: HomeView
     },
     {
         path: '/herd',
         name: 'Herd',
-        component: Herd
+        component: HerdView
     },
     {
         path: '/hug',
         name: 'Hug',
-        component: Hug
+        component: HugView
     },
     {
         path: '/register',
         name: 'Register',
-        component: Register,
+        component: RegisterView,
         meta: {
             unregisteredOnly: true
         }
@@ -38,19 +38,19 @@ const routes = [
     {
         path: '/herd/:id',
         name: 'Pony',
-        component: Pony
+        component: PonyView
     },
     {
         path: '/admin',
         name: 'Admin',
         // Admin is lazy load, mert az átlag usereknek nem kell
-        component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
     },
     {
         path: '/about',
         name: 'About',
         // About az lazy load, mert senki se fogja amugy se elolvasni
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
         meta: {
             public: true
         }
