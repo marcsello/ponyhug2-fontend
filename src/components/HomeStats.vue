@@ -20,7 +20,7 @@
             <b-progress-bar
                 :value="$store.state.leader_score"
                 :label="leaderScoreLabel" variant="secondary"
-                            />
+            />
           </b-progress>
         </p>
         <p>
@@ -31,7 +31,7 @@
                 :key="faction.id"
                 :value="$store.state.faction_stats[faction.id] || 0"
                 :label="$store.state.faction_stats[faction.id] + ''"
-                :variant="faction.variant"
+                :variant="resolveVariant(faction.color_scheme)"
             />
           </b-progress>
         </p>
@@ -69,6 +69,13 @@ export default {
         this.secondsLeft = 0
       }
 
+    },
+    resolveVariant(color_scheme) {
+      if (color_scheme === "blue") {
+        return "primary"
+      } else if (color_scheme === "yellow") {
+        return "warning"
+      }
     }
   },
   watch: {
