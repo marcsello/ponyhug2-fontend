@@ -29,7 +29,7 @@
         <p>Az alábbi térkép mutatja hogy mekkora területet érdemes átvizsgálni. Nincs semmi trükk, a határokon kívül
           tényleg nem rejtettünk el semmit.</p>
         <b-aspect aspect="2:3" class="my-2">
-          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1G90E6YiIy2y-ngJXtcSq2BeD4CuWduQu">
+          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1oQ0lbbUhEBsag7Nks6nHcHCLCfc_CU0">
           </iframe>
         </b-aspect>
         <p>A feladatod az lesz, hogy ezeket a kártyákat megtaláld és a telefonod segítségével a rajtuk lévő kódokat
