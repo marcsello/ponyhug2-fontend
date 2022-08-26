@@ -43,7 +43,7 @@
         <p>Bizony!</p>
         <p>A játék egy verseny amit a legtöbb pónit megölelő játékos nyer a legrövidebb időn belül. A helyezetteket a
           játékidő lejárta után fogjuk kihirdetni!</p>
-        <p>A játék 2022. augusztus 27-én 11:15 órától 17:00 óráig tart.</p>
+        <p>A játék 2022. augusztus 27-én 10:30 órától 16:00 óráig tart.</p>
         <p>Tartsd nyitva a szemed hogy te öleld meg a legtöbb pónit mert értékes nyeremények várnak! Ennek ellenére
           nyugodtan menj keresgélni a barátaiddal. Egyedül nyerni magányos dolog.</p>
         <p>Idén, mint ahogy tavaj is, hogy felrázzuk kicsit a játékot, bevezettünk két csapatot. Az öleléseitek a
