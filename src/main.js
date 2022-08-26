@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
+import * as Sentry from "@sentry/vue";
 
 import App from './App.vue'
 import router from './router'
@@ -51,6 +52,15 @@ Vue.prototype.$showToast = function (text, type = 'error', local=true) {
         solid: true,
         appendToast: false
     })
+}
+
+if (process.env.VUE_APP_SENTRY_DSN) {
+    Sentry.init({
+        Vue,
+        dsn: process.env.VUE_APP_SENTRY_DSN,
+        integrations: [],
+        tracesSampleRate: 0.0,
+    });
 }
 
 new Vue({
