@@ -60,7 +60,7 @@
         </ul>
       </b-col>
     </b-row>
-    <b-row class="my-3">
+    <b-row class="my-3" v-if="$store.getters.isInValidTimeframe">
       <b-col>
         <h2>Ez az aminek tűnik...</h2>
         <p>
