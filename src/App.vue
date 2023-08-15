@@ -1,7 +1,7 @@
 <template>
   <div id="app">
 
-    <navbar/>
+    <nav-bar/>
 
     <div id="content">
       <b-container>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
+import NavBar from "@/components/NavBar";
 import FooterContent from "@/components/FooterContent";
 
 import {initialInfoFetchMixin} from '@/mixins'
@@ -27,7 +27,7 @@ import {initialInfoFetchMixin} from '@/mixins'
 export default {
   components: {
     FooterContent,
-    Navbar
+    NavBar
   },
   mixins: [
     initialInfoFetchMixin

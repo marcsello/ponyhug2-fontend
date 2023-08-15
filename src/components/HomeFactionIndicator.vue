@@ -4,7 +4,7 @@
       <b-card title="A csapatod">
         <p>
           <b-aspect aspect="1:1">
-            <b-img v-if="$store.state.factions_fetched" :src="$store.getters.myFactionData.icon_lg" fluid-grow/>
+            <b-img v-if="$store.state.factions_fetched" :src="imgSrc" fluid-grow/>
           </b-aspect>
         </p>
         <p class="h3 text-center">
@@ -25,6 +25,11 @@ export default {
       } else {
         return '...'
       }
+    },
+    imgSrc() {
+      const image_name = this.$store.getters.myFactionData.icon_set + "_team_lg.png"
+      const images = require.context('../assets/', false, /\.png$/)
+      return images('./' + image_name)
     }
   }
 }

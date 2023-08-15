@@ -20,7 +20,7 @@ import HerdGrid from "@/components/HerdGrid";
 import NavButtonGroup from "@/components/NavButtonGroup";
 
 export default {
-  name: "Herd",
+  name: "HerdView",
   components: {
     HerdStats,
     HerdGrid,

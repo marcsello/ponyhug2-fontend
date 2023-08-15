@@ -52,7 +52,7 @@ import GametimeWarning from '@/components/GametimeWarning'
 import {initialInfoFetchMixin} from '@/mixins'
 
 export default {
-  name: "Register",
+  name: "RegisterView",
   mixins: [
     initialInfoFetchMixin
   ],

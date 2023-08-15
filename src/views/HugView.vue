@@ -61,7 +61,7 @@ import GametimeWarning from '@/components/GametimeWarning'
 
 
 export default {
-  name: "Hug",
+  name: "HugView",
   components: {
     GametimeWarning
   },

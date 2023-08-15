@@ -5,7 +5,7 @@
 
       <b-navbar-brand>
         <b>PonyHug</b>
-        <b-badge>2021</b-badge>
+        <b-badge>2022</b-badge>
       </b-navbar-brand>
 
 
@@ -41,7 +41,7 @@ import LeaderScore from "@/components/LeaderScore";
 import FactionIndicator from "@/components/FactionIndicator";
 
 export default {
-  name: "Navbar",
+  name: "NavBar",
   components: {LeaderScore, FactionIndicator},
   methods: {},
   computed: {}

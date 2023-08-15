@@ -60,6 +60,17 @@
         </ul>
       </b-col>
     </b-row>
+    <b-row class="my-3" v-if="$store.getters.isInValidTimeframe">
+      <b-col>
+        <h2>Ez az aminek tűnik...</h2>
+        <p>
+          <b-img src="@/assets/legitqr.jpg" fluid-grow />
+        </p>
+        <p>
+          Igen, ez tényleg egy QR kód, scanneld be! (vagy hát, keress valakit akinek a telójáról bescannelheted)
+        </p>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
