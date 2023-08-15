@@ -12,7 +12,7 @@
       </b-col>
       <b-col cols="auto p-0">
         <div class="text-center">
-          <div>2019 - 2022</div>
+          <div>2019 - 2023</div>
           <div class="text-monospace">/)*(\</div>
         </div>
 

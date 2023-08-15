@@ -23,7 +23,7 @@ module.exports = {
             }),
             config.plugin('html')
                 .tap(args => {
-                    args[0].title = "Ponyhug 2022"
+                    args[0].title = "Ponyhug 2023"
                     return args
                 })
     }
