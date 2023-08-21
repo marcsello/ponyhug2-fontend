@@ -58,16 +58,8 @@
           <li><a href="https://github.com/marcsello/ponyhug2-fontend">Frontend</a></li>
           <li><a href="https://github.com/marcsello/ponyhug-backend">Backend</a></li>
         </ul>
-      </b-col>
-    </b-row>
-    <b-row class="my-3" v-if="$store.getters.isInValidTimeframe">
-      <b-col>
-        <h2>Ez az aminek tűnik...</h2>
         <p>
-          <b-img src="@/assets/legitqr.jpg" fluid-grow />
-        </p>
-        <p>
-          Igen, ez tényleg egy QR kód, scanneld be! (vagy hát, keress valakit akinek a telójáról bescannelheted)
+          Vagy <b>bármi egyéb ötlettel, javaslattal</b> keressetek meg minket közvetlen! Vagy írjatok levelet a <a href="mailto:marcsello@derpymail.org">marcsello@derpymail.org</a> címre.
         </p>
       </b-col>
     </b-row>

@@ -7,7 +7,7 @@
           :value="hugCount"
           :max="$store.state.total_ponies"
           animated
-          :variant="this.$store.getters.myFactionData.variant"/>
+          :variant="barVariant"/>
     </b-jumbotron>
   </b-overlay>
 </template>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     stillLoading() { // This is probably the worst way of doing this...
-      return this.hugsLoading || (this.$store.state.total_ponies == null) || (this.$store.getters.myFactionData == null)
+      return this.hugsLoading || (this.$store.state.total_ponies === null)
     },
     herdCounterText() {
       if (this.stillLoading) {
@@ -29,6 +29,15 @@ export default {
       } else {
         return this.hugCount + '/' + this.$store.state.total_ponies
       }
+    },
+    barVariant() {
+      if (this.stillLoading) {
+        return 'primary'
+      }
+      if (this.hugCount === this.$store.state.total_ponies) {
+        return 'success'
+      }
+      return 'primary'
     }
   }
 }

@@ -24,16 +24,7 @@
           </b-progress>
         </p>
         <p>
-          Csapatok ölelései
-          <b-progress :max="$store.getters.sumHugs">
-            <b-progress-bar
-                v-for="faction in $store.state.factions"
-                :key="faction.id"
-                :value="$store.state.faction_stats[faction.id] || 0"
-                :label="$store.state.faction_stats[faction.id] + ''"
-                :variant="resolveVariant(faction.color_scheme)"
-            />
-          </b-progress>
+          Összes ölelés: <b>{{ $store.state.total_hugs }}</b>
         </p>
       </b-card>
     </b-overlay>
@@ -42,18 +33,12 @@
 
 <script>
 
-import {factionsStatsUpdaterMixin} from "@/mixins";
-
 export default {
   name: "HomeStats",
-  mixins: [
-    factionsStatsUpdaterMixin
-  ],
   data() {
     return {
       localScore: 0,
       remainingTimeUpdateTimer: null,
-      factionsStatsUpdateTimer: null,
       secondsLeft: 0,
       hugsLoading: false
     }
@@ -70,13 +55,6 @@ export default {
       }
 
     },
-    resolveVariant(color_scheme) {
-      if (color_scheme === "blue") {
-        return "primary"
-      } else if (color_scheme === "yellow") {
-        return "warning"
-      }
-    }
   },
   watch: {
     '$store.state.timeframe': function () {
@@ -106,12 +84,11 @@ export default {
       // I hate javascript
     },
     stillLoading() {
-      return this.$store.state.leader_score == null ||
-          this.$store.state.total_ponies == null ||
+      return this.$store.state.leader_score === null ||
+          this.$store.state.total_ponies === null ||
+          this.$store.state.total_hugs === null ||
           !this.$store.state.timeframe.fetched ||
-          this.hugsLoading ||
-          !this.$store.state.faction_stats_fetched ||
-          !this.$store.state.factions_fetched
+          this.hugsLoading
     }
   },
   mounted() {
@@ -127,21 +104,13 @@ export default {
       this.updateCountdown()
     }, 1000)
 
-    // Faction stats
-
-    this.factionsStatsUpdateTimer = setInterval(() => {
-      this.updateFactionsStats()
-    }, 15000)
-
     this.$nextTick(() => {
       this.updateCountdown()
-      this.updateFactionsStats()
     })
 
   },
   beforeDestroy() {
     clearInterval(this.remainingTimeUpdateTimer)
-    clearInterval(this.factionsStatsUpdateTimer)
   }
 }
 </script>

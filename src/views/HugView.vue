@@ -4,6 +4,7 @@
       <b-col class="my-3 text-center">
 
         <gametime-warning/>
+        <unapproved-warning/>
 
         <h1>
           Ölelés
@@ -44,7 +45,7 @@
               </b-form-group>
 
               <div class="text-center py-3">
-                <b-button type="submit" variant="primary" :disabled="submitPending || (!$store.getters.isInValidTimeframe)">Ölelés!</b-button>
+                <b-button type="submit" variant="primary" :disabled="!hugAllowed">Ölelés!</b-button>
               </div>
 
             </b-form>
@@ -56,17 +57,19 @@
 </template>
 
 <script>
-import {leaderScoreUpdaterMixin} from '@/mixins'
+import {statsUpdaterMixin} from '@/mixins'
 import GametimeWarning from '@/components/GametimeWarning'
+import UnapprovedWarning from "@/components/UnapprovedWarning.vue";
 
 
 export default {
   name: "HugView",
   components: {
+    UnapprovedWarning,
     GametimeWarning
   },
   mixins: [
-    leaderScoreUpdaterMixin
+    statsUpdaterMixin
   ],
   data() {
     return {
@@ -92,7 +95,7 @@ export default {
         this.submitPending = true
 
         this.$api.performHug(this.form.key.toUpperCase()).then((hug) => {
-          this.updateLeaderScore() // In case we were the leader
+          this.updateStats() // In case we were the leader
           this.$showToast("Új pónit öleltél meg!", "success", false)
           this.$store.dispatch('storeJustScannedCode', this.form.key)
           this.$router.push({name: 'Pony', params: {id: hug.id}})
@@ -131,7 +134,7 @@ export default {
   },
   mounted() {
     if (this.$route.hash) {
-      const scanned_key = this.$route.hash.substr(1)
+      const scanned_key = this.$route.hash.substring(1)
 
       // Super gagyi solution, de most nem tudok jobbat... a sima back button spamet megoldja...
       if (scanned_key === this.$store.state.just_scanned_code) {
@@ -140,6 +143,11 @@ export default {
         this.form.key = scanned_key
         this.onSubmit()
       }
+    }
+  },
+  computed: {
+    hugAllowed() {
+      return (!this.submitPending) && this.$store.getters.isInValidTimeframe && this.$store.state.playerdata.is_approved
     }
   }
 }

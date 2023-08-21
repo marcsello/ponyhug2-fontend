@@ -63,6 +63,8 @@ if (process.env.VUE_APP_SENTRY_DSN) {
     });
 }
 
+Vue.prototype.$bus = new Vue() // passing events around components never been easier and fragile at the same time... I hate js so much
+
 new Vue({
     router,
     store,

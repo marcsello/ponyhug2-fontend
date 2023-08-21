@@ -114,7 +114,7 @@ export default new class {
                 return resolve({
                     name: data.name,
                     is_admin: data.is_admin,
-                    faction: data.faction
+                    is_approved: data.is_approved
                     // Do not pass JWT token any further
                 })
 
@@ -135,29 +135,9 @@ export default new class {
         })
     }
 
-    getFactionData(id) {
-        return this._performApiCall('get', '/factions/' + id, null, true, 200, {
-            404: "Ilyen csapat nincs",
-            ...COMMON_ERROR_CODES
-        })
+    getStats() {
+        return this._performApiCall('get', '/stats', null, true, 200)
     }
-
-    getMyFactionData() {
-        return this._performApiCall('get', '/factions/my', null, true, 200)
-    }
-
-    getAllFactionData() {
-        return this._performApiCall('get', '/factions', null, true, 200)
-    }
-
-    getLeaderStat() {
-        return this._performApiCall('get', '/stats/leader', null, true, 200)
-    }
-
-    getFactionsStat() {
-        return this._performApiCall('get', '/stats/factions', null, true, 200)
-    }
-
     getTotalPonyCount() {
         return this._performApiCall('get', '/ponies/count', null, true, 200)
     }
@@ -183,7 +163,8 @@ export default new class {
             423: "A játék jelenleg inaktív",
             200: "Ezt a pónit már megölelted", // This is not an error actually..
             404: "Érvénytelen kód",
-            ...COMMON_ERROR_CODES
+            ...COMMON_ERROR_CODES,
+            403: "A regisztrációd még nincs elfogadva!",
         })
     }
 
@@ -193,6 +174,14 @@ export default new class {
 
     adminGetAllPlayers() {
         return this._performApiCall('get', '/players', null, true, 200)
+    }
+
+    adminGetPlayer(id) {
+        return this._performApiCall('get', `/players/${id}`, null, true, 200)
+    }
+
+    adminPatchPlayer(id, data) {
+        return this._performApiCall('patch', `/players/${id}`, data, true, 200)
     }
 
     adminGetAllTimeframes() {

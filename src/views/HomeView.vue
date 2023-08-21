@@ -2,6 +2,7 @@
   <div>
     <b-row>
       <b-col class="my-2 text-center">
+        <unapproved-warning/>
         <h1>PonyHug</h1>
         <p>A kaland itt indul...</p>
       </b-col>
@@ -9,11 +10,6 @@
     <b-row>
       <b-col class="my-2">
         <home-stats/>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="my-2">
-        <home-faction-indicator/>
       </b-col>
     </b-row>
     <b-row>
@@ -46,10 +42,6 @@
         <p>A játék 2022. augusztus 27-én 10:30 órától 16:00 óráig tart.</p>
         <p>Tartsd nyitva a szemed hogy te öleld meg a legtöbb pónit mert értékes nyeremények várnak! Ennek ellenére
           nyugodtan menj keresgélni a barátaiddal. Egyedül nyerni magányos dolog.</p>
-        <p>Idén, mint ahogy tavaj is, hogy felrázzuk kicsit a játékot, bevezettünk két csapatot. Az öleléseitek a
-          csapatotok eredményéhez ad
-          hozzá, de innentől rátok bízzuk, hogy ennek milyen jelentősséget tulajdonítotok. A te csapatod neve
-          {{ $store.state.factions_fetched ? $store.getters.myFactionData.name : '...' }}.</p>
         <h3>Mire van szükséged?</h3>
         <p>Egy akármilyen okostelefonra, azon egy böngészőre és bármilyen QR kód olvasóra ami képes linkeket
           megnyitni.</p>
@@ -72,14 +64,14 @@
 <script>
 
 import HomeStats from "@/components/HomeStats";
-import HomeFactionIndicator from "@/components/HomeFactionIndicator";
 import NavButtonGroup from "@/components/NavButtonGroup";
+import UnapprovedWarning from "@/components/UnapprovedWarning.vue";
 
 export default {
   name: 'HomeView',
   components: {
+    UnapprovedWarning,
     HomeStats,
-    HomeFactionIndicator,
     NavButtonGroup
   }
 }

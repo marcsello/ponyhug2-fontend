@@ -2,6 +2,7 @@
   <div>
     <b-row>
       <b-col>
+        <unapproved-warning/>
         <herd-stats :hug-count="hugs.length" :hugs-loading="hugsLoading"/>
       </b-col>
     </b-row>
@@ -18,10 +19,12 @@
 import HerdStats from "@/components/HerdStats";
 import HerdGrid from "@/components/HerdGrid";
 import NavButtonGroup from "@/components/NavButtonGroup";
+import UnapprovedWarning from "@/components/UnapprovedWarning.vue";
 
 export default {
   name: "HerdView",
   components: {
+    UnapprovedWarning,
     HerdStats,
     HerdGrid,
     NavButtonGroup
@@ -34,7 +37,7 @@ export default {
   },
   computed: {
     hugsAndTotalPoniesLoading() {
-      return this.hugsLoading || (this.$store.state.total_ponies == null);
+      return this.hugsLoading || (this.$store.state.total_ponies === null);
     }
   },
   mounted() {

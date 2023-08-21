@@ -80,6 +80,7 @@ export default {
 
         this.$store.dispatch('storePlayerData', partial_player_data).then(() => {
           this.fetchPrivateInfo() // Other info fetched automagically on pageload
+          this.$bus.$emit("register", partial_player_data) // greatest hack of the year...
           this.$router.push('/')
         })
 
