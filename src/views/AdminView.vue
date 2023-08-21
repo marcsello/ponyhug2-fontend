@@ -52,12 +52,6 @@
           <pre>{{ data.timeframes }}</pre>
         </b-col>
       </b-row>
-      <b-row>
-        <b-col>
-          <h1>Factions</h1>
-          <pre>{{ data.factions }}</pre>
-        </b-col>
-      </b-row>
     </div>
     <div>
       <b-row>
@@ -94,15 +88,15 @@ export default {
         },
         {
           key: 'playtime',
-          sortable: true
+          sortable: true,
+          formatter(n) {
+            return Number.parseFloat(n).toFixed(2)
+          }
         },
         {
           key: 'hug_counter',
           label: 'Hugs',
           sortable: true,
-        },
-        {
-          key: "faction"
         }
       ]
     }
@@ -140,15 +134,10 @@ export default {
         this.$showToast("Timeframes: " + text)
       })
 
-      this.$api.getAllFactionData().then((factions) => { // this isn't admin stuff, but meh...
-        this.data.factions = factions
-      }).catch(({text}) => {
-        this.$showToast("Factions: " + text)
-      })
-
     },
     rowClass(item, type) {
       if (!item || type !== 'row') return
+      if (!item.is_approved) return 'table-danger'
       if (item.hug_counter === this.$store.state.total_ponies) return 'table-success'
     }
 
