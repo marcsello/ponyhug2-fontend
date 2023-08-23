@@ -15,8 +15,8 @@
     <b-row>
       <b-col class="my-3">
         <h2>Kedves Játékos!</h2>
-        <p>Köszöntelek a 2022-es Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
-          pedig engedd meg, hogy köszönetet mondjak amiért részt veszel a játékunkban. Sokat dolgoztunk vele és
+        <p>Köszöntelek a 2023-as Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
+          pedig engedd meg, hogy köszönetet mondjak amiért részt veszel a játékunkban. Idén is sokat dolgoztunk vele és
           reméljük, hogy jól fogsz szórakozni.</p>
         <b-img src="@/assets/derpyflag.png" fluid-grow class="my-3"/>
         <h3>Na de hogyan is kell ezt játszani?</h3>
@@ -32,18 +32,18 @@
           beolvasd.</p>
         <p>Beolvasás után a telefonod egy pónit fog neked megjeleníteni aki nagyon boldog, hogy egy ölelést oszthat meg
           veled.
-          (Vagy nem. Lehet, hogy rossz napja volt)</p>
+          (Vagy nem. Lehet, hogy rossz napja volt...)</p>
         <p>Feltűnhet a fenti sötét sávban egy kis trófea ikon mellette egy számmal. Ez a versenyben vezető játékos által
           megölelt pónik számát mutatja.</p>
         <h3>Verseny?</h3>
         <p>Bizony!</p>
         <p>A játék egy verseny amit a legtöbb pónit megölelő játékos nyer a legrövidebb időn belül. A helyezetteket a
           játékidő lejárta után fogjuk kihirdetni!</p>
-        <p>A játék 2022. augusztus 27-én 10:30 órától 16:00 óráig tart.</p>
+        <p>A játék 2023. augusztus 26-án 11:00 órától 16:00 óráig tart.</p>
         <p>Tartsd nyitva a szemed hogy te öleld meg a legtöbb pónit mert értékes nyeremények várnak! Ennek ellenére
           nyugodtan menj keresgélni a barátaiddal. Egyedül nyerni magányos dolog.</p>
         <h3>Mire van szükséged?</h3>
-        <p>Egy akármilyen okostelefonra, azon egy böngészőre és bármilyen QR kód olvasóra ami képes linkeket
+        <p>Egy akármilyen okostelefonra, azon egy böngészőre és (opcionálisan) bármilyen QR kód olvasóra ami képes linkeket
           megnyitni.</p>
         <p>Ha valamilyen oknál fogva nem tudsz QR kódot beolvasni az "Ölelés" oldalon manuálisan is beírhatod a kártyán
           található "kulcsot".</p>
@@ -51,7 +51,7 @@
           épületekről szénakupacba ugrani. A játékban mindenki a saját felelősségére vesz részt! De kérünk mindenkit,
           hogy vigyázzon a saját és mások épségére!</p>
         <b-img src="@/assets/detectiveponk.png" fluid-grow/>
-        <p>Most, hogy mindent tudsz amit tudni lehet, menj és ölelj meg pár pónit.</p>
+        <p>Most, hogy mindent tudsz amit tudni lehet, menj és ölelj meg pár pónit!</p>
         <p>Jó szórakozást kívánunk és érezd jól magad a pikniken.</p>
         <p class="blockquote-footer">A fejlesztő csapat</p>
         <nav-button-group variant="primary"/>
