@@ -78,6 +78,12 @@ const routes = [
         meta: {
             public: true
         }
+    },
+    {
+        path: '/hesoyam',
+        name: 'HESOYAM',
+        // HESOYAM az lazy load, mert soha senki nem fogja megtalálni
+        component: () => import(/* webpackChunkName: "about" */ '../views/HesoyamView.vue'),
     }
 ]
 
