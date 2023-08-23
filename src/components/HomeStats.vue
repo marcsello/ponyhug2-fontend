@@ -96,6 +96,8 @@ export default {
     this.$api.getHugCount().then(({hug_counter}) => {
       this.localScore = hug_counter
       this.hugsLoading = false
+    }).catch(({text}) => {
+      this.$showToast(text)
     })
 
     // Countdown csík

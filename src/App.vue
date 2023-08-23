@@ -49,6 +49,8 @@ export default {
         console.log("Player is un-approved... will poll for state")
         this.approvalStateUpdateInterval = setInterval(this.checkApprovalState, 4500)
       }
+    }).catch(({text}) => {
+      this.$showToast(text)
     })
 
     this.statsUpdateInterval = setInterval(this.attemptStatUpdate, 15000)
@@ -92,6 +94,10 @@ export default {
 
       this.$api.getMyInfo().then((playerinfo) => {
         if (playerinfo.is_approved) {
+
+          if (!this.$store.state.playerdata.is_approved) {
+            this.$showToast("A regisztrációd elfogadásra került", "success", false)
+          }
 
           this.$store.dispatch("storePlayerApprovedStatus", true)
 

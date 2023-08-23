@@ -7,9 +7,9 @@ export const initialInfoFetchMixin = {
                     this.$api.getTotalPonyCount(),
                 ]).then((responses) => {
                     this.$store.dispatch('storeTotalPonies', responses[0].total_ponies).then(resolve).catch(reject)
-                }).catch(({text}) => {
-                    this.$showToast(text) // API call failed
-                    reject()
+                }).catch((err) => {
+                    this.$showToast(err.text) // API call failed
+                    reject(err)
                 })
             })
 
@@ -43,15 +43,15 @@ export const initialInfoFetchMixin = {
                             proms.push(
                                 this.fetchPrivateInfo()
                             )
-                            Promise.all(proms).then(resolve)
+                            Promise.all(proms).then(resolve).catch(reject)
                         })
-                    }).catch(({text}) => {
-                        this.$showToast(text) // API call failed
-                        reject()
+                    }).catch((err) => {
+                        this.$showToast(err.text) // API call failed
+                        reject(err)
                     })
 
                 } else {
-                    Promise.all(proms).then(resolve)
+                    Promise.all(proms).then(resolve).catch(reject)
                 }
 
             })

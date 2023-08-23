@@ -192,5 +192,9 @@ export default new class {
         return this._performApiCall('get', '/ponies', null, true, 200)
     }
 
+    adminImpersonate(playername) {
+        return this._performApiCall('post','/admin/impersonate', {playername}, true, 200)
+    }
+
 
 }

@@ -20,8 +20,16 @@
           <b-nav-item to="/herd" v-if="$store.state.playerdata.registered">Istálló</b-nav-item>
           <b-nav-item to="/register" v-if="!$store.state.playerdata.registered">Regisztráció</b-nav-item>
           <b-nav-item to="/about">Rólunk</b-nav-item>
-          <b-nav-item to="/admin" v-if="$store.state.playerdata.is_admin"><span class="text-danger">Admin</span>
-          </b-nav-item>
+
+          <b-nav-item-dropdown v-if="$store.state.playerdata.is_admin" class="text-danger" right>
+            <template #button-content>
+              <span class="text-danger">Admin</span>
+            </template>
+            <b-dropdown-item to="/admin/leaderboard">Leaderboard</b-dropdown-item>
+            <b-dropdown-item to="/admin/players">Players</b-dropdown-item>
+            <b-dropdown-item to="/admin/debug">Debug</b-dropdown-item>
+          </b-nav-item-dropdown>
+
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto" v-if="$store.state.playerdata.registered">
           <b-nav-text class="text-center text-white">

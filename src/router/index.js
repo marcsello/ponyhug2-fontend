@@ -42,9 +42,33 @@ const routes = [
     },
     {
         path: '/admin',
-        name: 'Admin',
+        name: 'Promote',
         // Admin is lazy load, mert az átlag usereknek nem kell
-        component: () => import(/* webpackChunkName: "about" */ '../views/AdminView.vue')
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin/PromoteView.vue')
+    },
+    {
+        path: '/admin/debug',
+        name: 'Debug',
+        // Admin is lazy load, mert az átlag usereknek nem kell
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin/DebugView.vue')
+    },
+    {
+        path: '/admin/leaderboard',
+        name: 'Leaderboard',
+        // Admin is lazy load, mert az átlag usereknek nem kell
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin/LeaderboardView.vue'),
+        meta: {
+            adminOnly: true
+        }
+    },
+    {
+        path: '/admin/players',
+        name: 'Players',
+        // Admin is lazy load, mert az átlag usereknek nem kell
+        component: () => import(/* webpackChunkName: "about" */ '../views/Admin/PlayersView.vue'),
+        meta: {
+            adminOnly: true
+        }
     },
     {
         path: '/about',
@@ -86,6 +110,7 @@ router.beforeEach((to, from, next) => {
             }
         }
     }
+    // Admin only not implemented, because it would require waiting for the user data to arrive, and I'm not in the mood of coding that
 })
 
 

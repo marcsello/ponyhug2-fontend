@@ -25,11 +25,9 @@
       </b-row>
     </div>
     <div v-if="$store.state.playerdata.is_admin">
-      <b-button @click="updateAllData" variant="success">Update All Data</b-button>
       <b-row>
         <b-col>
-          <h1>Leaderboard</h1>
-          <b-table striped :items="data.players" :fields="leaderboardFields" :tbody-tr-class="rowClass"></b-table>
+          <b-button @click="updateAllData" variant="success" :disabled="loading">Update All Data <b-spinner v-if="loading" small/></b-button>
         </b-col>
       </b-row>
       <b-row>
@@ -37,7 +35,8 @@
           <h1>Player Data</h1>
           <pre>{{ data.players }}</pre>
           <h1>Sum hugs</h1>
-          <b>{{ sumHugs }}</b>
+          <b>By summary:</b> {{ sumHugs }}<br>
+          <b>By API:</b> {{ data.stats.sum_hugs }}<br>
         </b-col>
       </b-row>
       <b-row>
@@ -48,16 +47,15 @@
       </b-row>
       <b-row>
         <b-col>
-          <h1>Timeframes</h1>
-          <pre>{{ data.timeframes }}</pre>
+          <h1>Total ponies</h1>
+          <b>By summary:</b> {{ data.ponies.length }}<br>
+          <b>By API:</b> {{ data.stats.sum_hugs }}<br>
         </b-col>
       </b-row>
-    </div>
-    <div>
       <b-row>
         <b-col>
-          <h1>Danger</h1>
-          <b-button @click="forgetMe" variant="danger">Forget Me</b-button>
+          <h1>Timeframes</h1>
+          <pre>{{ data.timeframes }}</pre>
         </b-col>
       </b-row>
     </div>
@@ -69,77 +67,72 @@
 /// Danger Zone ///
 
 export default {
-  name: "AdminView",
+  name: "DebugView",
   data() {
     return {
-      promoteform: {
-        adminkey: ""
-      },
+      loading: false,
       data: {
         ponies: [],
         players: [],
         timeframes: [],
-        factions: []
+        factions: [],
+        stats: {sum_hugs:0},
+        total_ponies_count: 0
       },
-      leaderboardFields: [
-        {
-          key: 'name',
-          sortable: true
-        },
-        {
-          key: 'playtime',
-          sortable: true,
-          formatter(n) {
-            return Number.parseFloat(n).toFixed(2)
-          }
-        },
-        {
-          key: 'hug_counter',
-          label: 'Hugs',
-          sortable: true,
-        }
-      ]
     }
   },
   methods: {
-    forgetMe() {
-      if (confirm("Are you sure?")) {
-        localStorage.clear()
-        location.reload()
-      }
-    },
-    doPromote() {
-      this.$api.adminPerformPromote(this.promoteform.adminkey).then(() => {
-        location.reload()
-      }).catch(({text}) => {
-        this.$showToast(text)
-      })
-    },
     updateAllData() {
+      this.loading = true
+      let expReq = 5
+      const reqComplete = function () {
+        expReq--
+        if (expReq === 0) {
+          this.loading = false
+        }
+      }.bind(this)
+
       this.$api.adminGetAllPlayers().then((players) => {
         this.data.players = players
+        reqComplete()
       }).catch(({text}) => {
         this.$showToast("Players" + text)
+        reqComplete()
       })
 
       this.$api.adminGetAllPonies().then((ponies) => {
         this.data.ponies = ponies
+        reqComplete()
       }).catch(({text}) => {
         this.$showToast("Ponies: " + text)
+        reqComplete()
       })
 
       this.$api.adminGetAllTimeframes().then((timeframes) => {
         this.data.timeframes = timeframes
+        reqComplete()
       }).catch(({text}) => {
         this.$showToast("Timeframes: " + text)
+        reqComplete()
+      })
+
+      this.$api.getStats().then((stats) => {
+        this.data.stats = stats
+        reqComplete()
+      }).catch(({text}) => {
+        this.$showToast("Sum hugs: " + text)
+        reqComplete()
+      })
+
+      this.$api.getTotalPonyCount().then((cnt) => {
+        this.data.total_ponies_count = cnt.total_ponies
+        reqComplete()
+      }).catch(({text}) => {
+        this.$showToast("Total Pony Count: " + text)
+        reqComplete()
       })
 
     },
-    rowClass(item, type) {
-      if (!item || type !== 'row') return
-      if (!item.is_approved) return 'table-danger'
-      if (item.hug_counter === this.$store.state.total_ponies) return 'table-success'
-    }
 
   },
   computed: {
