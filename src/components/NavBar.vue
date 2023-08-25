@@ -27,6 +27,7 @@
             </template>
             <b-dropdown-item to="/admin/leaderboard">Leaderboard</b-dropdown-item>
             <b-dropdown-item to="/admin/players">Players</b-dropdown-item>
+            <b-dropdown-item to="/admin/ponies">Ponies</b-dropdown-item>
             <b-dropdown-item to="/admin/debug">Debug</b-dropdown-item>
           </b-nav-item-dropdown>
 

@@ -34,6 +34,8 @@
         <b-col>
           <h1>Player Data</h1>
           <pre>{{ data.players }}</pre>
+          <h1>Player count</h1>
+          <b>By summary:</b> {{ data.players.length }}<br>
           <h1>Sum hugs</h1>
           <b>By summary:</b> {{ sumHugs }}<br>
           <b>By API:</b> {{ data.stats.sum_hugs }}<br>
