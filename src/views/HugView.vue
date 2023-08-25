@@ -93,9 +93,13 @@ export default {
         return
       }
 
+      /* TODO: FIXME
+      Quick hack: playerdata arrives later then the initial submit is fired, so it would prevent the submit
+      We just skip this check for now as it is quite late...
       if (!this.$store.state.playerdata.is_approved) {
         return
       }
+       */
 
       if (this.form.key.length !== 10) {
         this.inputGood = false
