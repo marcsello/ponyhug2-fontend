@@ -88,6 +88,15 @@ export default {
         Since I'm short on time I'm going to ignore this issue for now
        */
 
+      if (this.form.key.toUpperCase() === "HESOYAM") {
+        this.$router.push({name: "HESOYAM"})
+        return
+      }
+
+      if (!this.$store.state.playerdata.is_approved) {
+        return
+      }
+
       if (this.form.key.length !== 10) {
         this.inputGood = false
       } else {
@@ -127,7 +136,7 @@ export default {
   watch: {
     'form.key': function () {
       if (this.inputGood !== null) {
-        this.inputGood = this.form.key.length === 10
+        this.inputGood = this.form.key.length === 10 || (this.form.key.toUpperCase() === "HESOYAM")
       }
     }
 
