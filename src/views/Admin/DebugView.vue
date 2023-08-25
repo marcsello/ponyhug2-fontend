@@ -1,67 +1,50 @@
 <template>
   <div>
-    <div v-if="!$store.state.playerdata.is_admin">
-      <b-row>
-        <b-col>
-          <h1>Promote</h1>
-          <b-form @submit.prevent="doPromote">
-            <b-form-group
-                id="input-group-adminkey"
-                label-for="input-adminkey"
-            >
-              <b-form-input
-                  id="input-adminkey"
-                  v-model="promoteform.adminkey"
-                  type="text"
-                  required
-                  autocomplete="off"
-              ></b-form-input>
-            </b-form-group>
-
-            <b-button type="submit" variant="primary">Promote!</b-button>
-
-          </b-form>
-        </b-col>
-      </b-row>
-    </div>
-    <div v-if="$store.state.playerdata.is_admin">
-      <b-row>
-        <b-col>
-          <b-button @click="updateAllData" variant="success" :disabled="loading">Update All Data <b-spinner v-if="loading" small/></b-button>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <h1>Player Data</h1>
-          <pre>{{ data.players }}</pre>
-          <h1>Player count</h1>
-          <b>By summary:</b> {{ data.players.length }}<br>
-          <h1>Sum hugs</h1>
-          <b>By summary:</b> {{ sumHugs }}<br>
-          <b>By API:</b> {{ data.stats.sum_hugs }}<br>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <h1>Ponies</h1>
-          <pre>{{ data.ponies }}</pre>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <h1>Total ponies</h1>
-          <b>By summary:</b> {{ data.ponies.length }}<br>
-          <b>By API:</b> {{ data.stats.sum_hugs }}<br>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          <h1>Timeframes</h1>
-          <pre>{{ data.timeframes }}</pre>
-        </b-col>
-      </b-row>
-    </div>
+    <b-row>
+      <b-col>
+        <b-button @click="updateAllData" variant="success" :disabled="loading">Update All Data
+          <b-spinner v-if="loading" small/>
+        </b-button>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>Player Data</h1>
+        <pre>{{ data.players }}</pre>
+        <h1>Player count</h1>
+        <b>By summary:</b> {{ data.players.length }}<br>
+        <h1>Sum hugs</h1>
+        <b>By summary:</b> {{ sumHugs }}<br>
+        <b>By API:</b> {{ data.stats.sum_hugs }}<br>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>Ponies</h1>
+        <pre>{{ data.ponies }}</pre>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>Total ponies</h1>
+        <b>By summary:</b> {{ data.ponies.length }}<br>
+        <b>By API:</b> {{ data.stats.sum_hugs }}<br>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>Timeframes</h1>
+        <pre>{{ data.timeframes }}</pre>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col>
+        <h1>JWT Token</h1>
+        <pre>{{ token }}</pre>
+      </b-col>
+    </b-row>
   </div>
+
 </template>
 
 <script>
@@ -78,7 +61,7 @@ export default {
         players: [],
         timeframes: [],
         factions: [],
-        stats: {sum_hugs:0},
+        stats: {sum_hugs: 0},
         total_ponies_count: 0
       },
     }
@@ -144,6 +127,9 @@ export default {
       } else {
         return 0
       }
+    },
+    token() {
+      return localStorage.getItem("JWT")
     }
   }
 }

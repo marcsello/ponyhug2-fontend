@@ -26,7 +26,7 @@
       <b-col>
         <h1>Top 3</h1>
         <ol>
-          <li v-for="ply in top3" :key="ply.name"><b>{{ ply.name }}</b> ({{ply.hug_counter}};{{parseInt(ply.playtime)}})</li>
+          <li v-for="ply in top3" :key="ply.name"><b>{{ ply.name }}</b> ({{ply.hug_counter}}; {{parseInt(ply.playtime)}})</li>
         </ol>
       </b-col>
     </b-row>
@@ -87,7 +87,7 @@ export default {
         return []
       }
 
-      const players = _.cloneDeep(this.players)
+      const players = _.cloneDeep(this.players).filter((ply) => ply.is_approved)
       const orderedPlayers = _.orderBy(players, ['hug_counter', 'playtime'], ['desc', 'asc'])
       return orderedPlayers.slice(0,3)
     }
