@@ -11,10 +11,10 @@
           </b-card>
         </b-col>
       </b-row>
-      <b-row class="my-2">
+      <b-row class="my-3">
         <b-col>
           <h2>Statisztikák</h2>
-          <table class="table  table-striped table-light">
+          <table class="table table-striped table-light mb-1">
             <tbody>
             <tr>
               <th scope="row" class="align-middle">Ekkor ölelted</th>
@@ -26,7 +26,7 @@
             </tr>
             </tbody>
           </table>
-          <table class="table  table-striped table-light">
+          <table class="table table-striped table-light mb-1">
             <tbody>
             <tr>
               <th scope="row" class="align-middle">Először ölelte</th>
@@ -44,6 +44,9 @@
             </tr>
             </tbody>
           </table>
+          <div class="text-right" v-if="!!hugdata.pony.source">
+            <b-link :href="hugdata.pony.source" class="float-right text-muted"><small>kép forrása</small></b-link>
+          </div>
         </b-col>
       </b-row>
     </div>
