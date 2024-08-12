@@ -26,7 +26,7 @@
       <b-col>
         <h1>Top 3</h1>
         <ol>
-          <li v-for="ply in top3" :key="ply.name"><b>{{ ply.name }}</b> ({{ply.hug_counter}}; {{parseInt(ply.playtime)}})</li>
+          <li v-for="ply in top3" :key="ply.name"><b>{{ ply.name }}</b> (cnt: {{ply.hug_counter}}; time: {{parseInt(ply.playtime)}})</li>
         </ol>
       </b-col>
     </b-row>
