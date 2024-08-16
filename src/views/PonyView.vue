@@ -28,9 +28,13 @@
           </table>
           <table class="table table-striped table-light mb-1">
             <tbody>
-            <tr>
+            <tr :class="{'table-success': hugdata.pony.first_hug.playername === $store.state.playerdata.name}">
               <th scope="row" class="align-middle">Először ölelte</th>
               <td>{{ hugdata.pony.first_hug.playername }}</td>
+            </tr>
+            <tr v-if="hugdata.pony.first_hug.playername !== $store.state.playerdata.name && hugdata.pony.first_hug.timestamp !== hugdata.timestamp">
+              <th scope="row" class="align-middle">... ekkor</th>
+              <td>{{ hugdata.pony.first_hug.timestamp|formathugtimestamp }}</td>
             </tr>
             <tr>
               <th scope="row" class="align-middle">Összesen megölelték</th>
@@ -117,7 +121,7 @@ export default {
   },
   filters: {
     formathugtimestamp(value) {
-      return moment(String(value)).format('hh:mm:ss')
+      return moment(String(value)).format('HH:mm:ss')
     }
   }
 }
