@@ -49,7 +49,8 @@
             </tbody>
           </table>
           <div class="text-right" v-if="!!hugdata.pony.source">
-            <b-link :href="hugdata.pony.source" class="float-right text-muted"><small>kép forrása</small></b-link>
+            <b-link v-if="hugdata.pony.source.startsWith('https://')" :href="hugdata.pony.source" ><small>kép forrása</small></b-link>
+            <small v-else class="text-muted">kép forrása: {{hugdata.pony.source}}</small>
           </div>
         </b-col>
       </b-row>
