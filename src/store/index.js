@@ -19,6 +19,7 @@ export default new Vuex.Store({
         total_ponies: null,
         leader_score: null,
         total_hugs: null,
+        unhugged_ponies: null,
         just_scanned_code: null // This is used to prevent back-button spam (we store the last code used, and ignore it only if it's in the hash... a new scan will reload the app anyways)
     },
 
@@ -44,9 +45,10 @@ export default new Vuex.Store({
         storeTotalPonies(state, total_ponies) {
             state.total_ponies = total_ponies
         },
-        storeStats(state, {leader_hug_count, sum_hugs}) {
+        storeStats(state, {leader_hug_count, sum_hugs, unhugged_ponies_count}) {
             state.leader_score = leader_hug_count
             state.total_hugs = sum_hugs
+            state.unhugged_ponies = unhugged_ponies_count
         },
         storeJustScannedCode(state, just_scanned_code) {
             state.just_scanned_code = just_scanned_code

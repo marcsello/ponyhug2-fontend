@@ -15,6 +15,15 @@
           </b-progress>
         </p>
         <p>
+          Pónik, akiket még senki nem talált meg
+          <b-progress :max="$store.state.total_ponies">
+            <b-progress-bar
+                :value="$store.state.unhugged_ponies"
+                :label="unhuggedPoniesLabel" variant="success"
+            />
+          </b-progress>
+        </p>
+        <p>
           A vezető ölelései
           <b-progress :max="$store.state.total_ponies">
             <b-progress-bar
@@ -24,7 +33,7 @@
           </b-progress>
         </p>
         <p>
-          Összes ölelés: <b>{{ $store.state.total_hugs }}</b>
+          Összes regisztrált ölelés: <b>{{ $store.state.total_hugs }}</b>
         </p>
       </b-card>
     </b-overlay>
@@ -62,11 +71,14 @@ export default {
     }
   },
   computed: {
+    unhuggedPoniesLabel() {
+      return this.$store.state.unhugged_ponies + ' / ' + this.$store.state.total_ponies
+    },
     leaderScoreLabel() {
-      return this.$store.state.leader_score + '/' + this.$store.state.total_ponies
+      return this.$store.state.leader_score + ' / ' + this.$store.state.total_ponies
     },
     localScoreLabel() {
-      return this.localScore + '/' + this.$store.state.total_ponies
+      return this.localScore + ' / ' + this.$store.state.total_ponies
     },
     totalSeconds() {
       return (this.$store.state.timeframe.end_timestamp - this.$store.state.timeframe.begin_timestamp) / 1000
