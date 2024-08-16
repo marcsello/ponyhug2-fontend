@@ -35,7 +35,7 @@
             <p>Ki hitte volna, hogy ilyen nehéz footert csinálni?</p>
           </div>
           <div class="my-2">
-            <h4>Matthyly</h4>
+            <h4>Matthyly, Simon és Pizzás Csiga</h4>
             <p>Piknik nélkül mihez kezdenénk?</p>
           </div>
           <div class="my-2">
