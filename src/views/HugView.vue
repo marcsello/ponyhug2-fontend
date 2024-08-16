@@ -119,7 +119,7 @@ export default {
           switch (status) {
             case 200: // this is not an error actually
               this.$showToast("Ezt a pónit megölelted már!", "user_error", false)
-              this.$store.dispatch('storeJustScannedCode', this.form.key)
+              this.$store.dispatch('storeJustScannedCode', this.form.key) // <- I have no idea why, but If I remove this, it breaks...
               this.$router.push({name: 'Pony', params: {id: data.id}})
               break;
             case 409:
