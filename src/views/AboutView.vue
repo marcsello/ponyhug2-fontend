@@ -21,6 +21,9 @@
         <b-card title="Tormakris" img-src="@/assets/tormakris.png" img-right class="my-2">
           <span class="text-muted">DevOps, Backend</span>
         </b-card>
+        <b-card title="oliva" img-src="@/assets/oliva.png" img-right class="my-2">
+          <span class="text-muted">Content</span>
+        </b-card>
       </b-col>
     </b-row>
     <b-row>

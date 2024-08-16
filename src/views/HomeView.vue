@@ -15,23 +15,21 @@
     <b-row>
       <b-col class="my-3">
         <h2>Kedves Játékos!</h2>
-        <p>Köszöntelek a 2023-as Hunbrony által szervezett Magyar Brony Pikniken! A teljes fejlesztő csapat nevében
-          pedig engedd meg, hogy köszönetet mondjak amiért részt veszel a játékunkban. Idén is sokat dolgoztunk vele és
-          reméljük, hogy jól fogsz szórakozni.</p>
+        <p>Üdv a Hunbrony által szervezett 2024-es Magyar Brony Pikniken! A fejlesztő csapat nevében köszönjük, hogy
+           részt veszel a játékunkban. Idén is <s>sokat</s> dolgoztunk vele és reméljük, hogy jól fogsz szórakozni.</p>
         <b-img src="@/assets/derpyflag.png" fluid-grow class="my-3"/>
-        <h3>Na de hogyan is kell ezt játszani?</h3>
-        <p>Ha 2019 óta részt vettél valamelyik Brony Pikniken már ismerős lehet a koncepció.</p>
-        <p>A Margit szigeten a Piknik helyszínének közelében elrejtettünk számos kártyát rajtuk QR kóddal.</p>
-        <p>Az alábbi térkép mutatja hogy mekkora területet érdemes átvizsgálni. Nincs semmi trükk, a határokon kívül
-          tényleg nem rejtettünk el semmit.</p>
+        <h3>Hogy tudok beszállni?</h3>
+        <p>Ha 2019 óta voltál bármelyik Brony Pikniken, akkor ismerős a koncepció.</p>
+        <p>A Margit-szigeten a Piknik helyszínének közelében elrejtettünk számos kártyát rajtuk QR kóddal.</p>
+        <p>Az alábbi térkép mutatja hogy hol érdemes keresgélni. Nem trükközünk, a határon kívül tényleg nem rejtettünk
+          el semmit.</p>
         <b-aspect aspect="2:3" class="my-2">
-          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1mfBB_DJmruRHuFmSvxsH4DKYEV6QV7M">
+          <iframe class="fill" src="https://www.google.com/maps/d/u/0/embed?mid=1nb2q8M3omodub8jrfaMV7TpRVHjzWQE&ehbc=2E312F&noprof=1">
           </iframe>
         </b-aspect>
-        <p>A feladatod az lesz, hogy ezeket a kártyákat megtaláld és a telefonod segítségével a rajtuk lévő kódokat
-          beolvasd.</p>
+        <p>A feladatod ezeket a kártyákat megtalálni és a telefonoddal a rajtuk lévő kódokat beolvasni.</p>
         <p>
-          Idén egy kicsit változtattunk a kódok megjelenésén. Egy picit kisebbek és dizájnosabbak lettek. Alább láthatsz
+          Tavaly egy kicsit változtattunk a kódok megjelenésén. Egy picit kisebbek és dizájnosabbak lettek. Alább láthatsz
           egy példát arra, hogy idén milyen papírkákat kell keresned:
         </p>
         <p>
@@ -47,13 +45,12 @@
         <p>Bizony!</p>
         <p>A játék egy verseny amit a legtöbb pónit megölelő játékos nyer a legrövidebb időn belül. A helyezetteket a
           játékidő lejárta után fogjuk kihirdetni!</p>
-        <p>A játék 2023. augusztus 26-án 11:00 órától 16:00 óráig tart.</p>
+        <p>A játék 2024. augusztus 17-én 11:00 órától 16:00 óráig tart.</p>
         <p>Tartsd nyitva a szemed hogy te öleld meg a legtöbb pónit mert értékes nyeremények várnak! Ennek ellenére
           nyugodtan menj keresgélni a barátaiddal. Egyedül nyerni magányos dolog.</p>
         <h3>Mire van szükséged?</h3>
         <p>Egy akármilyen okostelefonra, azon egy böngészőre és (opcionálisan) bármilyen QR kód olvasóra ami képes
-          linkeket
-          megnyitni.</p>
+          linkeket megnyitni.</p>
         <p>Ha valamilyen oknál fogva nem tudsz QR kódot beolvasni az "Ölelés" oldalon manuálisan is beírhatod a kártyán
           található "kulcsot".</p>
         <p><b>FONTOS:</b> Minden kártyát könnyen elérhető helyre rejtettünk. Egyikhez sem kell kúszni. mászni vagy magas

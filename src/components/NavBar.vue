@@ -5,7 +5,7 @@
 
       <b-navbar-brand>
         <b>PonyHug</b>
-        <b-badge>2023</b-badge>
+        <b-badge>2024</b-badge>
       </b-navbar-brand>
 
 
